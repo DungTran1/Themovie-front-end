@@ -1,0 +1,55 @@
+@use "../../scss/" as *;
+.movie__card {
+  position: relative;
+  color: $white;
+  padding: 0 0.5rem;
+  transform: scale(1) translateY(10px);
+  transition: transform 0.3s ease;
+  margin-bottom: 10px;
+  .card__img {
+    background-color: rgba($color: #ffffff, $alpha: 0.05);
+    border-radius: 1rem;
+    width: 18.2rem;
+
+    h2 {
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .vote__averge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.6rem;
+    border-radius: 2rem;
+    padding: 0.5rem 0.5rem;
+    min-width: 6rem;
+    font-weight: 606;
+
+    background-color: rgb(81 121 255);
+    span {
+      margin-right: 0.2rem;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.03) translateY(5px);
+  }
+  img {
+    height: 28rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  h2 {
+    padding: 1.5rem 1rem;
+  }
+  input[type="checkbox"] {
+    background-color: transparent;
+    padding: 5px;
+    border: 2px solid rgba($color: $white, $alpha: 0.3);
+  }
+}

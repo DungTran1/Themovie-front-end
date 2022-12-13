@@ -1,0 +1,51 @@
+@use "../../scss" as *;
+.body__wrapp__content {
+  @include flex(unset, unset);
+}
+.body__wrapp__content.noFlex {
+  // width: 55%;
+  display: block;
+}
+.logo {
+  @include flex(center, space-between);
+  padding: 10px 10px 10px 10px;
+  font-size: 2.5rem;
+  font-weight: 500;
+  .logo__img {
+    @include flex(center, unset);
+    img {
+      width: 5rem;
+    }
+    text-transform: uppercase;
+    p {
+      color: rgba($color: $white, $alpha: 1);
+    }
+    span {
+      color: rgba($color: #2389ff, $alpha: 1);
+    }
+  }
+  button {
+    background-color: transparent;
+    svg {
+      background-color: transparent;
+      font-size: 3rem;
+      color: rgba($color: $white, $alpha: 0.5);
+    }
+  }
+}
+.mobile__menu {
+  transform: translateX(-1000px);
+  transition: all 0.5s ease-in-out;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgb(51 51 53);
+  &.shrink {
+    transform: translateX(0);
+  }
+  div {
+    display: block;
+    box-shadow: unset;
+  }
+}

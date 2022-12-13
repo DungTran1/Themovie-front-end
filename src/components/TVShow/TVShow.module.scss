@@ -1,0 +1,71 @@
+@use "../../scss" as *;
+.wrapper {
+  cursor: pointer;
+}
+.season__wrapper {
+  @include flex(center, unset);
+  margin: 2rem 0;
+  border-radius: 10px;
+  padding: 8px;
+  position: relative;
+  &:hover {
+    background-color: rgba($color: #ffffff, $alpha: 0.3);
+  }
+  .img {
+    min-height: 50px;
+    min-width: 100px;
+    img {
+      min-width: 100px;
+      height: 150px;
+      border-radius: 10px;
+    }
+  }
+  .info {
+    margin: 10px 5px 0 20px;
+    h4 {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 8px;
+      margin-top: 25px;
+      outline: none;
+      border: 1px solid rgba($color: #403dff, $alpha: 0.8);
+      border-radius: 15px;
+      background-color: transparent;
+      color: rgba($color: #ffffff, $alpha: 0.8);
+    }
+  }
+}
+.episode__wrapper {
+  @include flex(center, unset);
+  padding: 10px 0 10px 20px;
+  position: relative;
+  .poster {
+    @include flex(unset, unset);
+    margin: 0 5px;
+    .overview {
+      margin: 0 5px;
+      max-height: 70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .img {
+    min-height: 80px;
+    min-width: 160px;
+  }
+  img {
+    border-radius: 10px;
+    min-width: 160px;
+    height: 80px;
+    object-fit: cover;
+  }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}

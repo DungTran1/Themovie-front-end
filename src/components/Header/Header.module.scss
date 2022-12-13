@@ -1,0 +1,80 @@
+@use "../../scss" as *;
+.modal__menu__left {
+  min-width: 22%;
+  // color: $white;
+  color: rgb(152 152 152);
+
+  & > div {
+    position: sticky;
+    top: -0;
+    padding: 50px 0 0 25px;
+  }
+  &.shrink {
+    min-width: 6%;
+    box-shadow: none;
+    & > div {
+      padding: 50px 0 0 0;
+    }
+    .logo {
+      padding-left: 20px;
+      color: rgba($color: $white, $alpha: 1);
+    }
+  }
+}
+
+.logo {
+  @include flex(center, unset);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 20px;
+  .logo__name {
+    padding-left: 1rem;
+  }
+  .lastname {
+    color: rgba($color: #002ec4, $alpha: 1);
+  }
+  .logo__img {
+    width: 30px;
+    height: 30px;
+  }
+}
+.menu {
+  font-size: 1.2rem;
+  h2 {
+    font-weight: 500;
+    color: $white;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-weight: 400;
+  }
+  .menu__items {
+    padding: 0 1.8rem 1.8rem 0rem;
+    font-size: 1.4rem;
+    .item {
+      display: block;
+    }
+    .item__link {
+      @include flex(center, unset);
+      padding: 2rem;
+      cursor: pointer;
+      svg {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      h3 {
+        padding-left: 2rem;
+      }
+      &.active {
+        color: rgba($color: #6563e0, $alpha: 1);
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .modal__menu__left {
+    display: none;
+  }
+}

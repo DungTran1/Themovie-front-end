@@ -1,0 +1,20 @@
+@use "../../scss" as *;
+
+.menu {
+  position: sticky;
+  top: 0;
+  margin: 3rem 0;
+}
+
+.genres {
+  margin-top: 20px;
+  button {
+    padding: 8px;
+    margin-right: 5px;
+    margin-top: 5px;
+    outline: none;
+    border-radius: 15px;
+    background-color: rgba($color: #ffffff, $alpha: 0.2);
+    color: rgba($color: #ffffff, $alpha: 0.8);
+  }
+}

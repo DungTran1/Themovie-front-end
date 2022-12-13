@@ -1,0 +1,107 @@
+@use "../../scss/" as *;
+.swiper {
+  border-radius: 15px;
+}
+.slide__wrapper {
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: $white;
+  z-index: -10;
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0)
+    );
+    z-index: -9;
+    transition: all 0.5s ease;
+  }
+  &::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: blue;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("http://simpleicon.com/wp-content/uploads/play1.png");
+    visibility: hidden;
+  }
+  &:hover::before {
+    visibility: visible;
+  }
+  &:hover::after {
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.2)
+    );
+  }
+}
+.vote__average {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background-color: rgb(81 121 255);
+  padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+  border-radius: 15px;
+  svg {
+    font-size: 2rem;
+  }
+}
+.info {
+  max-width: 75%;
+  font-size: 1.6rem;
+  margin: 1rem 0 1rem 2rem;
+  color: $white;
+}
+.title__original {
+  font-size: 5rem;
+  font-weight: 800;
+  color: rgba(0, 255, 221, 0.8);
+}
+.Release__date {
+  color: rgba($color: #ffffff, $alpha: 1);
+  margin: 2rem 0;
+}
+.genres {
+  display: flex;
+  button {
+    margin: 0 1rem 0.5rem 0.5rem;
+    padding: 1rem;
+    color: rgba($color: #ffffff, $alpha: 1);
+    font-weight: 700;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 1px solid rgba($color: #ffffff, $alpha: 1);
+  }
+}
+.overview {
+  color: rgba($color: #ffffff, $alpha: 0.5);
+  margin: 1rem 0 1rem 0;
+  height: 5rem;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+}
+@media (max-width: 420px) {
+  .title__original {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,26 @@
+.search {
+  margin: 50px 0 20px 0;
+  .searchBox {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+  }
+  .isQuery {
+    transform: translateY(-10px);
+  }
+  .title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: white;
+  }
+  .img {
+    text-align: center;
+    margin-top: 50px;
+    img {
+      width: 60%;
+    }
+  }
+}
