@@ -128,7 +128,7 @@ function Header({
               e.preventDefault();
               firebase.auth().signOut();
               const res = await distance.post(
-                "http://localhost:5000/login/signout"
+                `${process.env.API_URL}/login/signout`
               );
               dispatch(logOut());
               console.log(res.data);
