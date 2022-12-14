@@ -10,7 +10,12 @@ const distance = axios.create({
     "content-type": "application/json",
   },
 });
-
+const distance2 = axios.create({
+  baseURL: process.env.API_URL,
+  headers: {
+    "content-type": "application/json",
+  },
+});
 export const getFirebaseToken = async () => {
   const currentUser = firebase.auth().currentUser;
 
@@ -54,7 +59,7 @@ export const getUserToken = async (user: any) => {
         return user?.accessToken;
       }
       if (decodeToken.exp < date.getTime() / 1000) {
-        const res = await distance.post(`${process.env.API_URL}/refreshtoken`);
+        const res = await distance2.post("/refreshtoken");
         console.log(res);
         return res.data.accessToken;
       }
@@ -72,15 +77,11 @@ const get = async (path: string, param = {}) => {
   return res.data;
 };
 const getUser = async (path: any, config: any = {}) => {
-  const res = await distance.get(`${process.env.API_URL}/${path}`, config);
+  const res = await distance2.get(`/${path}`, config);
   return res.data;
 };
 const postUser = async (path: any, data: any, config: any = {}) => {
-  const res = await distance.post(
-    `${process.env.API_URL}/${path}`,
-    data,
-    config
-  );
+  const res = await distance2.post(`/${path}`, data, config);
   return res.data;
 };
 
