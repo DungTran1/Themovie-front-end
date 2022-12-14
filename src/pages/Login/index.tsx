@@ -58,9 +58,7 @@ function Login() {
       const win: Window = window;
       if (post) {
         console.log(post);
-        const result = dispatch(getLoginUser(post));
-        // const unwrap = unwrapResult(result);
-        // console.log("unwrap", unwrap);
+        dispatch(getLoginUser(post));
         navigate("/");
       } else win.alert(post);
     } catch (error) {

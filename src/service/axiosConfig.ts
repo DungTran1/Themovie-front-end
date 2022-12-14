@@ -54,9 +54,7 @@ export const getUserToken = async (user: any) => {
         return user?.accessToken;
       }
       if (decodeToken.exp < date.getTime() / 1000) {
-        const res = await distance.post(
-          "https://themovie-api.onrender.com/refreshtoken"
-        );
+        const res = await distance.post(`${process.env.API_URL}/refreshtoken`);
         console.log(res);
         return res.data.accessToken;
       }
@@ -74,15 +72,12 @@ const get = async (path: string, param = {}) => {
   return res.data;
 };
 const getUser = async (path: any, config: any = {}) => {
-  const res = await distance.get(
-    `https://themovie-api.onrender.com/${path}`,
-    config
-  );
+  const res = await distance.get(`${process.env.API_URL}/${path}`, config);
   return res.data;
 };
 const postUser = async (path: any, data: any, config: any = {}) => {
   const res = await distance.post(
-    `https://themovie-api.onrender.com/${path}`,
+    `${process.env.API_URL}/${path}`,
     data,
     config
   );
