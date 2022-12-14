@@ -1,5 +1,4 @@
 import { FilmInfo } from "../../shared/types";
-import { get, getUser } from "../axiosConfig";
 import tmdbApi from "../tmdbApiConfig";
 
 export const getHistory = async (res: any): Promise<FilmInfo[]> => {

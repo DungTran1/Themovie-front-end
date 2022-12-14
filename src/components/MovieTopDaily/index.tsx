@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import tmdbApi from "../../service/tmdbApiConfig";
-
 import MovieCard from "../FilmItem/FilmItem";
 import classnames from "classnames/bind";
 import styles from "../../pages/Home/Home.module.scss";
+
+import { Item } from "../../shared/types";
+import { getHomeFilms } from "../../service/tmdbApi/Home";
 const cx = classnames.bind(styles);
 interface Props {
   type: string;
@@ -15,16 +16,15 @@ interface Props {
   title: string;
 }
 function MovieType({ title, type, media }: Props) {
-  const [movieTypes, setMovieTypes] = useState([]);
+  const [movieTypes, setMovieTypes] = useState<Item[]>([]);
   useEffect(() => {
     const fetch = async () => {
-      const res = await tmdbApi.getMovieList(media, type, "week");
-      setMovieTypes(res.results);
+      const res = await getHomeFilms(media, type, "week");
+      setMovieTypes(res);
     };
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [media]);
-  console.log(movieTypes);
   return (
     <>
       <div

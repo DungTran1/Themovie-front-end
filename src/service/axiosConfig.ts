@@ -81,8 +81,9 @@ const getUser = async (path: any, config: any = {}) => {
   return res.data;
 };
 const postUser = async (path: any, data: any, config: any = {}) => {
+  console.log(process.env.REACT_APP_API_URL);
   const res = await distance2.post(
-    `${process.env.API_URL}/${path}`,
+    `${process.env.REACT_APP_API_URL}/${path}`,
     data,
     config
   );

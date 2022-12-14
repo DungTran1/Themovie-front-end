@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import classnames from "classnames/bind";
 import styles from "./Login.module.scss";
+import { distance2 } from "../../service/axiosConfig";
 
 const cx = classnames.bind(styles);
 interface IFormInput {
@@ -21,7 +22,7 @@ function SignUp() {
   } = useForm<IFormInput>();
 
   const onSubmit = async (data: IFormInput) => {
-    const post = await axios.post("http://localhost:5000/login/signup", {
+    const post = await distance2.post("/login/signup", {
       name: data.name,
       password: data.password,
       email: data.email,
