@@ -12,7 +12,7 @@ import { Item, ItemsPage } from "../../shared/types";
 
 const cx = classnames.bind(styles);
 interface Props {
-  itemPage: Item;
+  itemPage: any;
   loading: boolean;
 }
 const FilmItem: React.FC<Props> = ({ itemPage, loading }) => {

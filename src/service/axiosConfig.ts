@@ -10,7 +10,7 @@ const distance = axios.create({
     "content-type": "application/json",
   },
 });
-const distance2 = axios.create({
+export const distance2 = axios.create({
   baseURL: process.env.API_URL,
   headers: {
     "content-type": "application/json",
@@ -77,11 +77,15 @@ const get = async (path: string, param = {}) => {
   return res.data;
 };
 const getUser = async (path: any, config: any = {}) => {
-  const res = await distance2.get(`/${path}`, config);
+  const res = await distance2.get(`${process.env.API_URL}/${path}`, config);
   return res.data;
 };
 const postUser = async (path: any, data: any, config: any = {}) => {
-  const res = await distance2.post(`/${path}`, data, config);
+  const res = await distance2.post(
+    `${process.env.API_URL}/${path}`,
+    data,
+    config
+  );
   return res.data;
 };
 

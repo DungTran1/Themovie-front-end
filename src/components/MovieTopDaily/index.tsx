@@ -24,7 +24,7 @@ function MovieType({ title, type, media }: Props) {
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [media]);
-
+  console.log(movieTypes);
   return (
     <>
       <div

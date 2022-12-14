@@ -23,6 +23,7 @@ import styles from "./Header.module.scss";
 
 import { useMediaQuery } from "react-responsive";
 import distance from "../../service/axiosConfig";
+import { distance2 } from "../../service/axiosConfig";
 import { logOut } from "../../reducer/currentUserSlice";
 import { RootState } from "../../app/index";
 const cx = classnames.bind(styles);
@@ -127,9 +128,7 @@ function Header({
             if (user) {
               e.preventDefault();
               firebase.auth().signOut();
-              const res = await distance.post(
-                `${process.env.API_URL}/login/signout`
-              );
+              const res = await distance2.post(`/login/signout`);
               dispatch(logOut());
               console.log(res.data);
               window.location.reload();
