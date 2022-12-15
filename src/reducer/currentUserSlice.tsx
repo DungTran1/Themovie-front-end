@@ -5,11 +5,11 @@ import userApi from "../service/userApiConfig";
 
 const FireBaseUser = async () => {
   const currentUser: any = firebase.auth().currentUser;
-  await userApi.postLogin("login", {
-    name: currentUser.displayName,
-    password: "email",
-    photoUrl: currentUser.photoURL,
-  });
+  // await userApi.postLogin("login", {
+  //   name: currentUser.displayName,
+  //   password: "email",
+  //   photoUrl: currentUser.photoURL,
+  // });
   return {
     id: currentUser.uid,
     name: currentUser.displayName,
