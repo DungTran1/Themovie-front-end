@@ -51,7 +51,7 @@ function Login() {
   } = useForm<IFormInput>();
   const onSubmit = async (data: IFormInput) => {
     try {
-      const post = await userApi.postLogin("/login", {
+      const post = await userApi.postLogin("login", {
         name: data.name,
         password: data.password,
       });
