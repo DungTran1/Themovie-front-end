@@ -153,7 +153,7 @@ function Comment({ user, id: movieId }: any) {
           <div className={cx("comment__content")}>
             <div className={cx("content")}>
               <div className={cx("info")}>
-                <h3>name</h3>
+                <h3>{item?.name}</h3>
                 <p>{item?.content}</p>
                 <div className={cx("most__icon")}>
                   {Object.entries(count).map((item: any) => {
