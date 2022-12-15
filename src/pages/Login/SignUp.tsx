@@ -29,6 +29,7 @@ function SignUp() {
     });
     const win: Window = window;
     if (post.data.path === "/") {
+      console.log(post.data);
       dispatch(getLoginUser(post.data.user));
       win.location = "/";
     } else win.alert(`${post.data.path}`);
