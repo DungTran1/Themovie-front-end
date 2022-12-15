@@ -1,6 +1,4 @@
-import { Props } from "react-select";
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
 import classnames from "classnames/bind";
 import styles from "./Login.module.scss";
 import { distance2 } from "../../service/axiosConfig";
@@ -17,7 +15,6 @@ function SignUp() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<IFormInput>();
 
@@ -29,13 +26,9 @@ function SignUp() {
     });
     const win: Window = window;
     if (post.data.path === "/") {
-      console.log(post.data);
       win.location = "/";
-    } else win.alert(`${post.data.path} ${post.data.check}`);
+    } else win.alert(`${post.data.path}`);
   }; // your form submit function which will invoke after successful validation
-
-  console.log(watch("example")); // you can watch individual input by pass the name of the input
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>First Name</label>

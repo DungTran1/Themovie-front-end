@@ -151,7 +151,7 @@ function History() {
           hasMore={false}
         >
           <Grid container spacing={2}>
-            {watched.map((itm, idx) => {
+            {watched?.map((itm, idx) => {
               return (
                 <Grid item key={idx} lg={3} textAlign="center">
                   <FilmItem loading={loading} itemPage={itm} />
