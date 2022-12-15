@@ -11,7 +11,7 @@ const distance = axios.create({
   },
 });
 export const distance2 = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "content-type": "application/json",
   },

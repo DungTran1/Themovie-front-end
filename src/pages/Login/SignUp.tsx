@@ -30,7 +30,7 @@ function SignUp() {
     const win: Window = window;
     if (post.data.path === "/") {
       win.location = "/";
-    } else win.alert(`Tai khoan da ton tai ${post.data.check}`);
+    } else win.alert(`${post.data.path} ${post.data.check}`);
   }; // your form submit function which will invoke after successful validation
 
   console.log(watch("example")); // you can watch individual input by pass the name of the input
