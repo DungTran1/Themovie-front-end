@@ -2,6 +2,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import classnames from "classnames/bind";
 import styles from "./Login.module.scss";
 import { distance2 } from "../../service/axiosConfig";
+import { getLoginUser } from "../../reducer/currentUserSlice";
+import { useDispatch } from "react-redux";
 
 const cx = classnames.bind(styles);
 interface IFormInput {
@@ -12,6 +14,7 @@ interface IFormInput {
 }
 
 function SignUp() {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -26,6 +29,7 @@ function SignUp() {
     });
     const win: Window = window;
     if (post.data.path === "/") {
+      dispatch(getLoginUser(post.data.user));
       win.location = "/";
     } else win.alert(`${post.data.path}`);
   }; // your form submit function which will invoke after successful validation
