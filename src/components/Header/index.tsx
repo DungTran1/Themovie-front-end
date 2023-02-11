@@ -1,45 +1,40 @@
 import React, { useRef } from "react";
-import firebase from "firebase/compat/app";
 import { useLocation, useNavigate } from "react-router-dom";
-import { singleUrl } from "../../config/routes";
 
-import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
-import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import LoginIcon from "@mui/icons-material/Login";
+import { MdOutlineExplore } from "react-icons/md";
+import {
+  AiOutlineSearch,
+  AiOutlineHistory,
+  AiOutlineHome,
+} from "react-icons/ai";
+import { BsFillBookmarkHeartFill } from "react-icons/bs";
+import { RiAccountCircleLine } from "react-icons/ri";
+
+import { FiLogOut, FiLogIn } from "react-icons/fi";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { auth } from "../../shared/firebase";
 import SideBarItem from "./SideBarItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import classnames from "classnames/bind";
 import styles from "./Header.module.scss";
-
 import { useMediaQuery } from "react-responsive";
-import distance from "../../service/axiosConfig";
-import { distance2 } from "../../service/axiosConfig";
 import { logOut } from "../../reducer/currentUserSlice";
-import { RootState } from "../../app/index";
-const cx = classnames.bind(styles);
 
-function Header({
-  menu,
-}: {
-  menu: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-}) {
-  const user = useSelector(
-    (state: RootState) => state.currentUserReducer.current
-  );
-  const [menuPop, setMenuPop] = menu;
+import { signOut } from "firebase/auth";
+import { useAppSelector } from "../../store/hooks";
+const cx = classnames.bind(styles);
+interface HeaderProp {
+  setMenuPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const Header: React.FC<HeaderProp> = ({ setMenuPopUp }) => {
+  const user = useAppSelector((state) => state.auth.current);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const isMobile = useMediaQuery({ query: "(max-width:420px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:740px)" });
   const scrollRef = useRef(null);
   let shrink: boolean;
   if (
@@ -60,7 +55,7 @@ function Header({
         closeButton: true,
       });
     } else {
-      setMenuPop(false);
+      setMenuPopUp(false);
     }
   };
   const sideBar = [
@@ -68,25 +63,25 @@ function Header({
       bigTitle: "Menu",
       Items: [
         {
-          icon: <HomeOutlinedIcon />,
+          icon: <AiOutlineHome />,
           title: "Home",
           shrink: shrink && !isMobile,
-          to: singleUrl.home,
-          onClick: () => setMenuPop(false),
+          to: "/",
+          onClick: () => setMenuPopUp(false),
         },
         {
-          icon: <ExploreOutlinedIcon />,
+          icon: <MdOutlineExplore />,
           title: "Discover",
           shrink: shrink && !isMobile,
-          to: singleUrl.explore,
-          onClick: () => setMenuPop(false),
+          to: "/discover",
+          onClick: () => setMenuPopUp(false),
         },
         {
-          icon: <SearchOutlinedIcon />,
+          icon: <AiOutlineSearch />,
           title: "Search",
           shrink: shrink && !isMobile,
-          to: singleUrl.search,
-          onClick: () => setMenuPop(false),
+          to: "/search",
+          onClick: () => setMenuPopUp(false),
         },
       ],
     },
@@ -94,17 +89,17 @@ function Header({
       bigTitle: "Personal",
       Items: [
         {
-          icon: <BookmarkAddOutlinedIcon />,
+          icon: <BsFillBookmarkHeartFill />,
           title: "Bookmark",
           shrink: shrink && !isMobile,
-          to: singleUrl.bookmark,
+          to: "/bookmark",
           onClick: notify,
         },
         {
-          icon: <HistoryOutlinedIcon />,
+          icon: <AiOutlineHistory />,
           title: "History",
           shrink: shrink && !isMobile,
-          to: singleUrl.history,
+          to: "/history",
           onClick: notify,
         },
       ],
@@ -113,25 +108,32 @@ function Header({
       bigTitle: "General",
       Items: [
         {
-          icon: <AccountCircleOutlinedIcon />,
+          icon: <RiAccountCircleLine />,
           title: "Profile",
           shrink: shrink && !isMobile,
-          to: singleUrl.profile,
+          to: "/profile",
           onClick: notify,
         },
         {
-          icon: (user && <LogoutOutlinedIcon />) || <LoginIcon />,
+          icon: (user && <FiLogOut />) || <FiLogIn />,
           title: (user && "Sign Out") || "Sign In",
           shrink: shrink && !isMobile,
           to: (user && null) || "/login",
-          onClick: async (e: any) => {
+          onClick: async (
+            e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+          ) => {
             if (user) {
               e.preventDefault();
-              firebase.auth().signOut();
-              const res = await distance2.post(`/login/signout`);
-              dispatch(logOut());
-              console.log(res.data);
-              window.location.reload();
+              signOut(auth)
+                .then((e) => {
+                  // Sign-out successful.
+                  dispatch(logOut());
+                  navigate("/");
+                })
+                .catch((error) => {
+                  // An error happened.
+                  console.log(error);
+                });
             }
           },
         },
@@ -148,7 +150,10 @@ function Header({
         {!isMobile && (
           <div className={cx("logo")}>
             <div className={cx("logo__img")}>
-              <img src="https://moonlight-films.vercel.app/logo.png" alt="" />
+              <img
+                src={require("../../assets/1140-morning-night-owl.jpg")}
+                alt=""
+              />
             </div>
             {(!shrink || isMobile) && (
               <div className={cx("logo__name")}>
@@ -181,6 +186,6 @@ function Header({
       </div>
     </div>
   );
-}
+};
 
 export default Header;

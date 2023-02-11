@@ -7,7 +7,7 @@ interface Props {
   title: string;
   to: string;
   shrink: boolean;
-  onClick: (e: React.MouseEvent) => void;
+  onClick: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 const SideBarItem: React.FC<Props> = ({ icon, title, to, shrink, onClick }) => {
   return (

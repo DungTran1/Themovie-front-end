@@ -1,17 +1,35 @@
 @use "../../scss" as *;
-
+@mixin HoverIcon($color) {
+  color: rgba($color: $color, $alpha: 0.9);
+  border-radius: 50%;
+  transform: translateY(-10px) rotate(-10deg);
+}
+.comment {
+  min-width: 500px;
+}
 .wrapper {
   .parent {
     @include flex(unset, unset);
     margin: 20px 0;
+    animation: identifier 0.5s ease;
   }
-  .children {
+  .child {
     @include flex(unset, unset);
     margin-left: 70px;
     margin-top: 20px;
+    animation: identifier 0.5s ease;
   }
 }
-
+@keyframes identifier {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: 100px;
+  }
+}
 .avatar {
   width: 50px;
   img {
@@ -19,6 +37,36 @@
     width: 50px;
     height: 50px;
     object-fit: cover;
+  }
+}
+.comment__part {
+  & > :first-child {
+    @include flex(center, space-between);
+    h4 {
+      color: $white;
+    }
+    .sort {
+      @include flex(unset, unset);
+      font-weight: 500;
+      font-size: 1.6rem;
+      div {
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .lastest {
+        background-color: rgba($color: $white, $alpha: 0.1);
+        color: rgba($color: $white, $alpha: 1);
+      }
+      .popular {
+        background-color: rgba($color: $white, $alpha: 0.1);
+        color: rgba($color: $white, $alpha: 1);
+      }
+      .currentCommentOption {
+        background-color: #4fa1ff;
+        box-shadow: 0 0 3px 2px #4fa1ff;
+      }
+    }
   }
 }
 .comment__content {
@@ -30,43 +78,70 @@
     position: relative;
     background-color: rgba($color: $white, $alpha: 0.1);
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     max-width: 70rem;
-    h3 {
+    h5 {
       color: $white;
+      margin-bottom: 10px;
     }
     p {
       word-break: break-all;
     }
     .most__icon {
+      cursor: pointer;
       position: absolute;
       bottom: -10px;
-      right: -35px;
+      right: -45px;
       background-color: rgba($color: $white, $alpha: 0.1);
       padding: 1px;
       border-radius: 20px;
-
+      @include flex(center, unset);
       .all__icon {
         display: none;
-        div {
-          @include flex(center, center);
-        }
       }
       &:hover .all__icon {
         display: block;
         position: absolute;
         top: -18px;
-        right: -34px;
+        right: -45px;
         background-color: rgba($color: $white, $alpha: 0.1);
         padding: 2px;
         border-radius: 5px;
       }
     }
-    h3 {
-      margin-bottom: 10px;
+    .edit__content {
+      & > div {
+        @include flex(center, space-between);
+      }
+      div[contenteditable] {
+        font-size: 1.5rem;
+        border: 1px solid black;
+        width: 200px;
+        min-height: 40px;
+        color: $white;
+        padding: 5px;
+        background-color: rgb(58, 58, 58);
+        border: transparent;
+        outline: none;
+      }
+      textArea {
+      }
     }
   }
   .hide {
+    position: absolute;
+    top: 20%;
+    right: -35px;
+
+    ul {
+      background-color: #0c0b0b;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    li {
+      cursor: pointer;
+      padding: 5px;
+    }
     svg {
       font-size: 30px;
     }
@@ -91,8 +166,76 @@
     }
   }
 }
+.show__reaction {
+  font-weight: 500;
+  color: $white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 400px;
+  border-radius: 15px;
+  padding: 5px;
+  z-index: 99;
+  background-color: #4a4a4a;
+  .close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .list__reacted {
+    padding-left: 20px;
+    @include flex(center, center);
+    li {
+      span {
+        padding-left: 5px;
+      }
+      font-size: 1.2rem;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      background-color: transparent;
+      padding: 5px;
+      border-radius: 15px;
+      @include flex(center, center);
+      &.onReacted {
+        background-color: #3d3c3c;
+      }
+    }
+  }
+  .list__user__reacted {
+    li {
+      margin: 10px 0;
+      @include flex(center, unset);
+      p {
+        margin-left: 15px;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+@keyframes showReply {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: 50px;
+  }
+}
+
+.comment__user__part.curUser {
+  margin-left: 0;
+}
 .comment__user__part {
-  margin: 20px 0 10px 100px;
+  margin: 20px 0 10px 70px;
+  animation: showReply 0.3s ease;
   .user__comments {
     form {
       @include flex(center, unset);
@@ -122,29 +265,43 @@
     }
   }
 }
-.curUser {
-  margin: 0;
+.not__loginin__note {
+  @include flex(unset, center);
+  i {
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #3f3f3f;
+  }
 }
-.favoriteIcon,
-.thumpUpIcon,
-.sentimentIcon {
-  font-size: 20px;
+$colorHover: (
+  "heart": #fa5c5c,
+  "like": #6084fc,
+  "haha": #fdfb67,
+  "angry": #a446d3,
+  "sad": #52d3a8,
+  "surprise": #e99847,
+);
+@each $name, $color in $colorHover {
+  .#{$name}Icon {
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      @include HoverIcon($color);
+    }
+  }
 }
-.favoriteIcon {
-  color: rgba($color: #ff0000, $alpha: 0.8);
-}
-.thumpUpIcon {
-  color: rgba($color: #3967ff, $alpha: 0.8);
-}
-.sentimentIcon {
-  color: rgba($color: #fffc39, $alpha: 0.8);
-}
-.loadMore button {
-  color: $white;
-  margin: 0 auto;
-  background-color: rgba($color: $white, $alpha: 0.1);
-  border-radius: 20px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding: 10px;
+
+.loadMore {
+  margin: 10px 0;
+
+  text-align: center;
+  button {
+    color: $white;
+    margin: 0 auto;
+    background-color: rgba($color: $white, $alpha: 0.1);
+    border-radius: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 10px;
+  }
 }

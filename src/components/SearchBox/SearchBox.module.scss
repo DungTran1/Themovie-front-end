@@ -12,11 +12,6 @@
     top: 50%;
     left: 1rem;
     transform: translateY(-50%);
-    svg {
-      color: rgba($color: #ffffff, $alpha: 0.4);
-      width: 3rem;
-      height: 3rem;
-    }
   }
   input {
     background-color: transparent;
@@ -30,6 +25,11 @@
   &.right {
     width: 25rem;
   }
+}
+.close__search {
+  position: absolute;
+  top: 25%;
+  right: 10px;
 }
 .search-result {
   background-color: rgb(51 51 53);

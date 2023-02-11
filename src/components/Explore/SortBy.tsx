@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Select, { SingleValue } from "react-select";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { MdKeyboardArrowDown, MdNavigateNext } from "react-icons/md";
 
 import classnames from "classnames/bind";
-import styles from "./MenuItem.module.scss";
+import styles from "./MenuFilter.module.scss";
 import { useSearchParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 const cx = classnames.bind(styles);
 
 const options = [
@@ -14,9 +14,9 @@ const options = [
   { value: "primary_release_date", label: "Most Recent" },
 ];
 const SortBy: React.FC = () => {
-  const [sortDrop, setSortDrop] = useState<boolean>(true);
+  const isMobile = useMediaQuery({ maxWidth: "520px" });
+  const [sortDrop, setSortDrop] = useState<boolean>(!isMobile && true);
   const [sortParam, setSortParam] = useSearchParams();
-  useEffect(() => {});
   const handleChangeOption = (
     e: SingleValue<{
       value: string;
@@ -26,18 +26,42 @@ const SortBy: React.FC = () => {
     sortParam.set("sort_by", e?.value as string);
     setSortParam(sortParam);
   };
+
+  const customStyles = {
+    control: (styles: any) => ({
+      ...styles,
+      backgroundColor: "#49494b",
+      boxShadow: "none",
+      border: 0,
+    }),
+    option: (styles: any, { isSelected }: any) => ({
+      ...styles,
+      backgroundColor: isSelected ? "#989898" : "#49494b",
+    }),
+
+    singleValue: (provided: any) => {
+      return { ...provided, color: "white" };
+    },
+
+    menu: (styles: any) => ({
+      ...styles,
+      backgroundColor: "#49494b",
+    }),
+  };
   return (
     <div className={cx("sort", { active: sortDrop })}>
-      <div>
+      <div onClick={() => setSortDrop(!sortDrop)}>
         <h4 className={cx("title")}>Sort</h4>
-        <div className={cx("icon")} onClick={() => setSortDrop(!sortDrop)}>
-          {(sortDrop && <KeyboardArrowDownIcon />) || <NavigateNextIcon />}
+        <div className={cx("icon")}>
+          {(sortDrop && <MdKeyboardArrowDown />) || <MdNavigateNext />}
         </div>
       </div>
       <hr />
       <div className={cx("sort__dropdown")}>
-        <div className={cx("")}>
+        <div>
           <Select
+            isSearchable={false}
+            styles={customStyles}
             className={cx("select")}
             onChange={handleChangeOption}
             options={options}

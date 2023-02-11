@@ -1,24 +1,21 @@
 import { useState, useEffect } from "react";
 
-import ScrollContainer from "react-indiana-drag-scroll";
-
 import { useSearchParams } from "react-router-dom";
 
 import classnames from "classnames/bind";
-import styles from "./MenuItem.module.scss";
-import tmdbApi from "../../service/tmdbApiConfig";
+import styles from "./MenuFilter.module.scss";
+import { useQuery } from "@tanstack/react-query";
+import { getRecommendGenres2 } from "../../service/tmdbApi/Search";
 const cx = classnames.bind(styles);
-const FilterByGenre = () => {
+interface FilterByGenreProps {
+  media: string;
+}
+const FilterByGenre: React.FC<FilterByGenreProps> = ({ media }) => {
   const [params, setParams] = useSearchParams();
   const [filters, setFilters] = useState<number[]>([]);
-  const [genres, setGenres] = useState<{ id: number; name: string }[]>([]);
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await tmdbApi.getGenres("movie");
-      setGenres(res.genres);
-    };
-    fetch();
-  }, []);
+  const { data } = useQuery(["genresfilter", media], getRecommendGenres2);
+  const genres = media === "movie" ? data?.movieGenres : data?.tvGenres;
+
   useEffect(() => {
     if (filters.length === 0) {
       params.delete("genres");
@@ -50,9 +47,9 @@ const FilterByGenre = () => {
   };
 
   return (
-    <ScrollContainer hideScrollbars={false} className={cx("genres")}>
+    <div className={cx("genres")}>
       <h4>Genres</h4>
-      {genres.map((itm, idx) => (
+      {genres?.map((itm, idx) => (
         <button
           className={cx({
             btn: true,
@@ -65,7 +62,7 @@ const FilterByGenre = () => {
           {itm.name}
         </button>
       ))}
-    </ScrollContainer>
+    </div>
   );
 };
 

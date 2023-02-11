@@ -1,20 +1,24 @@
 @use "../../scss" as *;
 .body__wrapp__content {
   @include flex(unset, unset);
+  min-height: calc(100vh - 100px);
 }
 .body__wrapp__content.noFlex {
   // width: 55%;
   display: block;
 }
 .logo {
-  @include flex(center, space-between);
-  padding: 10px 10px 10px 10px;
+  // @include flex(center, space-between);
+  padding: 5px 5px 0 5px;
   font-size: 2.5rem;
   font-weight: 500;
   .logo__img {
     @include flex(center, unset);
     img {
-      width: 5rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
     }
     text-transform: uppercase;
     p {
@@ -47,5 +51,34 @@
   div {
     display: block;
     box-shadow: unset;
+  }
+}
+footer {
+  background-color: #000000;
+  div {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+    > div {
+      div {
+        margin-bottom: 20px;
+      }
+    }
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  p {
+    margin: 5px 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  strong {
+    color: #2389ff;
+  }
+}
+@media (max-width: 740px) {
+  .logo {
+    font-size: 2rem;
   }
 }

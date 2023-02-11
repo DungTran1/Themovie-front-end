@@ -1,3 +1,19 @@
+export interface UserComment {
+  _id: string;
+  uid: string;
+  displayName: string;
+  photoURL: string;
+  content: string;
+  comments: string;
+  reaction: Array<{
+    uid: string;
+    type: string;
+    displayName: string;
+    photoURL: string;
+  }>;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export interface Item {
   poster_path: string;
   overview: string;
@@ -230,8 +246,9 @@ export interface User {
   displayName: string | null;
   email: string | null;
   emailVerified: boolean;
-  photoURL: string | null;
   uid: string;
+  photoURL?: string;
+  accessToken?: string;
 }
 
 export interface CommentDataType {

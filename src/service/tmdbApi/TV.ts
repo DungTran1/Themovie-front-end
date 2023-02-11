@@ -66,14 +66,12 @@ export const getWatchTV = async (id: number): Promise<getWatchReturnedType> => {
     detail: res[0],
     recommendations: res[1].results,
   };
-
-  const detailSeasons = (
-    await Promise.all(
-      data.detail.seasons.map((season: DetailSeason) =>
-        get(`/tv/${id}/season/${season.season_number}`)
-      )
+  console.log(data);
+  const detailSeasons = await Promise.all(
+    data.detail.seasons.map((season: DetailSeason) =>
+      get(`/tv/${id}/season/${season.season_number}`)
     )
-  ).map((res) => res.data);
+  );
 
   return { ...data, detailSeasons };
 };

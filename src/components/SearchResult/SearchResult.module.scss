@@ -2,7 +2,7 @@
 .search {
   height: fit-content;
   padding: 5px 10px;
-  width: 250px;
+  width: 80%;
   max-height: 40px;
   overflow: hidden;
   color: rgba($color: $white, $alpha: 0.9);
@@ -50,22 +50,34 @@
 }
 
 .list__film {
-  @include flex(unset, unset);
   ul {
-    width: 75%;
-    @include flex(unset, unset);
-    flex-wrap: wrap;
+    & > li {
+      margin-bottom: 20px;
+    }
   }
 }
 .pagin {
   div {
     @include flex(center, center);
-    div {
+    flex-wrap: wrap;
+    a {
+      @include flex(center, center);
       background-color: rgba($color: #ffffff, $alpha: 0.1);
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       margin: 0 5px;
+    }
+  }
+  a.currentTab {
+    background-color: rgb(40, 126, 197);
+  }
+}
+@media (max-width: 46.25em) {
+  .pagin {
+    div {
+      a {
+      }
     }
   }
 }

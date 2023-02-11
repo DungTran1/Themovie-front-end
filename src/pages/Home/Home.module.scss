@@ -3,7 +3,6 @@
   padding: 1rem;
   color: $white;
   flex: 1;
-  width: 100%;
 }
 .media__change {
   @include flex(center, space-between);
@@ -24,21 +23,27 @@
     }
   }
 }
+.list__type {
+  width: 700px;
+}
+.type {
+  h2 {
+    padding: 10px 0;
+  }
+}
+@media (max-width: 1024px) {
+  .list__type {
+    width: 95%;
+  }
+}
+@media (max-width: 740px) {
+  .list__type {
+    width: 100%;
+  }
+}
 .slider {
 }
 .slider__content {
 }
 .genres {
-}
-.menu__right {
-  width: 25%;
-  background-color: black;
-}
-.list__type {
-  margin: 2rem 0;
-}
-.type {
-  margin: 1rem 1.5rem;
-  color: $white;
-  font-size: 1.6rem;
 }

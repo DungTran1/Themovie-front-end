@@ -1,15 +1,13 @@
 @use "../../scss" as *;
 
-.movie {
-  flex: 1;
+.film {
+  padding-right: 10px;
   .backdrop__image {
     position: relative;
-    width: 100%;
-    height: 40rem;
-    background-position: center;
+    background-position: center top;
     background-size: cover;
     .overlay {
-      @include overlay(0.5, unset);
+      @include overlay(absolute, 0.5, unset);
     }
   }
   .function__btn {
@@ -17,6 +15,7 @@
     top: 20px;
     right: 10px;
     display: flex;
+    z-index: 2;
     button {
       margin: 0 5px;
       background-color: transparent;
@@ -24,16 +23,15 @@
       border-radius: 50%;
       width: 50px;
       height: 50px;
+      &.isbookmark {
+        background-color: #ffbaba;
+        border-color: #eb6d6d;
+      }
       svg {
         transform: translateY(2px);
-        font-size: 25px;
-        color: $white;
       }
       &:hover {
-        border: 3px solid #2e59e7;
-        svg {
-          color: #2e59e7;
-        }
+        border: 3px solid #ec6363;
       }
     }
   }
@@ -41,9 +39,11 @@
 .heading {
   font-size: 3rem;
   position: absolute;
-  top: 50%;
+  bottom: 0;
   left: 0;
+  transform: translateY(25%);
   width: 100%;
+  z-index: 1;
   color: $white;
   @include flex(center, unset);
   img {
@@ -59,7 +59,6 @@
     align-items: center;
     position: absolute;
     right: 0;
-    bottom: 150px;
     border-radius: 30px;
     background-color: rgba($color: #2e59e7, $alpha: 1);
     border: none;
@@ -77,6 +76,7 @@
   position: relative;
   z-index: 9;
   display: flex;
+  flex-wrap: wrap;
   font-size: 1.6rem;
   color: $white;
   .rating__col {
@@ -104,10 +104,9 @@
   .middle__col {
     border-right: 1px solid rgba($color: $white, $alpha: 0.2);
     width: 410px;
-    max-width: 420px;
-
+    max-width: 100%;
+    padding: 0 1rem 0 3rem;
     .change {
-      padding-left: 20px;
       @include flex(unset, center);
       li {
         cursor: pointer;
@@ -123,12 +122,12 @@
         }
       }
     }
+
     .overall__item,
     .cast__item {
-      padding: 0 1rem 0 3rem;
       h3 {
         text-align: center;
-        margin: 3rem 0;
+        margin: 10px 0;
       }
       .story {
         margin-bottom: 20px;
@@ -144,11 +143,17 @@
         }
       }
     }
+    .overall__item {
+      padding-top: 25px;
+    }
     .cast__item {
       .scroll {
+        padding-top: 30px;
         @include flex(unset, space-between);
         flex-wrap: wrap;
         max-height: 390px;
+        overflow-y: scroll;
+        overflow-x: hidden;
       }
       .celeb {
         line-height: 1.5;
@@ -171,11 +176,14 @@
       }
     }
     .review__item {
-      padding: 30px;
       .scroll {
+        padding: 30px;
         @include flex(unset, space-between);
         flex-wrap: wrap;
         max-height: 390px;
+        width: 360px;
+        overflow-y: scroll;
+        overflow-x: hidden;
       }
       .celeb {
         line-height: 1.5;
@@ -210,17 +218,18 @@
   }
 }
 .title {
-  margin: 0 30px;
   margin-top: -100px;
+  max-width: 55%;
   h3 {
+    text-align: center;
     font-size: 3rem;
     margin-bottom: 30px;
     color: $white;
   }
   .genres {
-    max-width: 500px;
     flex-wrap: wrap;
     display: flex;
+    justify-content: center;
     button {
       border-radius: 20px;
       background-color: transparent;
@@ -232,7 +241,7 @@
   }
 }
 .isMobile__rating {
-  padding: 2rem 3rem 0 3rem;
+  padding: 2rem 3rem 1rem 3rem;
   @include flex(center, center);
   text-transform: uppercase;
   font-weight: 500;
@@ -246,14 +255,41 @@
 .menu {
   margin-bottom: 10px;
 }
-.title.isMobile {
-  margin-top: 10rem;
-}
-@media (max-width: 420px) {
-  .movie {
-    width: 100%;
+
+@media (max-width: 64em) {
+  .heading {
+    img {
+      height: 270px;
+    }
+  }
+  .menu {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .film {
+    padding: 0;
   }
   .info {
-    display: block;
+    .middle__col {
+      padding-bottom: 20px;
+      .overall__item {
+        padding-top: 0;
+      }
+    }
+  }
+}
+@media (max-width: 46.25em) {
+  .heading {
+    img {
+    }
+    .watch__btn {
+      padding: 10px 30px 10px 30px;
+    }
+  }
+  .title {
+    margin-top: 70px;
+    padding-left: 5px;
+    padding-right: 5px;
+    max-width: 100%;
   }
 }

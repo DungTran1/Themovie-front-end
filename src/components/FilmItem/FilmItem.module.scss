@@ -2,20 +2,26 @@
 .movie__card {
   position: relative;
   color: $white;
-  padding: 0 0.5rem;
-  transform: scale(1) translateY(10px);
-  transition: transform 0.3s ease;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   .card__img {
+    position: relative;
     background-color: rgba($color: #ffffff, $alpha: 0.05);
-    border-radius: 1rem;
+    border-radius: 10px;
     width: 18.2rem;
-
-    h2 {
-      text-align: center;
+    transform: scale(1) translateY(10px);
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.03) translateY(5px);
+    }
+    h4 {
       white-space: nowrap;
       overflow: hidden;
+      text-align: center;
+      font-size: 1.6rem;
+      height: 50px;
+      width: 181px;
       text-overflow: ellipsis;
+      line-height: 50px;
     }
   }
   .vote__averge {
@@ -36,20 +42,9 @@
     }
   }
 
-  &:hover {
-    transform: scale(1.03) translateY(5px);
-  }
   img {
     height: 28rem;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-  }
-  h2 {
-    padding: 1.5rem 1rem;
-  }
-  input[type="checkbox"] {
-    background-color: transparent;
-    padding: 5px;
-    border: 2px solid rgba($color: $white, $alpha: 0.3);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
 }

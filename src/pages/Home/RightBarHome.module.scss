@@ -1,0 +1,32 @@
+@use "../../scss" as *;
+
+.menu {
+  position: relative;
+  & > div {
+    position: sticky;
+    top: 0;
+    right: 0;
+    margin: 30px 0;
+    z-index: 999;
+  }
+}
+
+.genres {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  a {
+    font-size: 1.6rem;
+    display: inline-block;
+    padding: 8px;
+    margin-right: 5px;
+    margin-top: 5px;
+    outline: none;
+    border-radius: 15px;
+    border: 1px solid #664fe5;
+  }
+}
+@media (max-width: 1024px) {
+  // .menu > div {
+  //   position: unset;
+  // }
+}

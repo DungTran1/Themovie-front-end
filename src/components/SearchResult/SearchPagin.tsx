@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import classnames from "classnames/bind";
 import styles from "./SearchResult.module.scss";
@@ -13,6 +13,8 @@ const SearchPagin: React.FC<PaginationProps> = ({
   onChangePage,
   maxPage,
 }) => {
+  const [searchParams] = useSearchParams();
+  console.log(searchParams.get("page"), currentPage);
   return (
     <div className={cx("pagin")}>
       <div>
@@ -25,13 +27,7 @@ const SearchPagin: React.FC<PaginationProps> = ({
         {currentPage < 5 ? (
           <>
             {new Array(maxPage < 5 ? maxPage : 5).fill("").map((_, index) => (
-              <Link
-                key={index}
-                to={onChangePage(index + 1)}
-                className={`tw-pagination-btn ${
-                  currentPage === index + 1 && "!bg-primary text-white"
-                }`}
-              >
+              <Link key={index} to={onChangePage(index + 1)}>
                 <div>
                   <p>{index + 1}</p>
                 </div>
@@ -40,12 +36,7 @@ const SearchPagin: React.FC<PaginationProps> = ({
             {maxPage > 5 && (
               <>
                 {maxPage > 6 && <span>...</span>}
-                <Link
-                  to={onChangePage(maxPage)}
-                  className={`tw-pagination-btn ${
-                    currentPage === maxPage && "!bg-primary text-white"
-                  }`}
-                >
+                <Link to={onChangePage(maxPage)}>
                   <div>
                     <p>{maxPage}</p>
                   </div>
@@ -55,40 +46,26 @@ const SearchPagin: React.FC<PaginationProps> = ({
           </>
         ) : currentPage > maxPage - 4 ? (
           <>
-            <Link
-              to={onChangePage(1)}
-              className={`tw-pagination-btn ${
-                currentPage === 1 && "!bg-primary text-white"
-              }`}
-            >
-              1
+            <Link to={onChangePage(1)}>
+              <p> 1</p>
             </Link>
             <span>. . .</span>
             {[...new Array(5)].map((_, index) => (
               <Link
                 key={index}
                 to={onChangePage(maxPage - 4 + index)}
-                className={`tw-pagination-btn ${
-                  currentPage === maxPage - 4 + index &&
-                  "!bg-primary text-white"
-                }`}
+                // className={cx({
+                //   currentTab: Number(searchParams.get("page")) === currentPage,
+                // })}
               >
-                <div>
-                  <p> {maxPage - 4 + index}</p>
-                </div>
+                <p> {maxPage - 4 + index}</p>
               </Link>
             ))}
           </>
         ) : (
           <>
-            <Link
-              to={onChangePage(1)}
-              className={`tw-pagination-btn ${
-                currentPage === 1 && "!bg-primary text-white"
-              }`}
-            >
+            <Link to={onChangePage(1)}>
               <div>
-                {" "}
                 <p>1</p>
               </div>
             </Link>
@@ -97,26 +74,21 @@ const SearchPagin: React.FC<PaginationProps> = ({
               <Link
                 key={index}
                 to={onChangePage(currentPage - 2 + index)}
-                className={`tw-pagination-btn ${
-                  currentPage === currentPage - 2 + index &&
-                  "!bg-primary text-white"
-                }`}
+                className={cx({
+                  currentTab: index === currentPage,
+                })}
               >
-                <div>
-                  <p> {currentPage - 2 + index}</p>
-                </div>
+                <p> {currentPage - 2 + index}</p>
               </Link>
             ))}
             <span>...</span>
             <Link
               to={onChangePage(maxPage)}
-              className={`tw-pagination-btn ${
-                currentPage === maxPage && "!bg-primary text-white"
-              }`}
+              // className={cx({
+              //   currentTab: Number(searchParams.get("page")) === currentPage,
+              // })}
             >
-              <div>
-                <p>{maxPage}</p>
-              </div>
+              <p>{maxPage}</p>
             </Link>
           </>
         )}

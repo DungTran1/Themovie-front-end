@@ -13,6 +13,7 @@
 }
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -41,14 +42,15 @@ img {
   max-width: 100%;
 }
 .bg__color {
-  background-color: rgba($color: #000000, $alpha: 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
 }
 .swiper {
-  width: 70rem;
-  height: 33rem;
-  overflow-y: unset;
+  // width: 70rem;
+  // height: 34rem;
+  // overflow-y: unset;
 }
-@media (max-width: 420px) {
+@media (max-width: 740px) {
   .swiper {
     width: unset;
   }

@@ -1,197 +1,167 @@
+@use "../../scss" as *;
+.video {
+  width: 100%;
+  height: 135vh;
+  position: fixed;
+  top: -130px;
+  left: 0;
+  z-index: -10;
+  object-fit: cover;
+}
+.overlay {
+  @include overlay(fixed, 0.2, -5);
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 250px;
+    background-image: linear-gradient(
+      rgba($color: #000000, $alpha: 0),
+      rgba($color: #000000, $alpha: 1)
+    );
+  }
+}
 .wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
-  background-image: url("https://i.pinimg.com/originals/88/15/63/881563d6444b370fa4ceea0c3183bb4c.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
   color: rgba($color: #ffffff, $alpha: 1);
   font-size: 1.8rem;
+  p {
+    color: red;
+  }
   .container {
     width: 50%;
-    margin-top: 20px;
+    margin-top: 50px;
     padding-bottom: 30px;
-    background-color: rgb(37, 33, 33, 0.5);
-    border: 0.1px solid #ccc;
   }
   .content {
     margin-top: 30px;
     padding: 20px 50px;
-  }
-  .changeForm-btn {
-    button {
-      color: rgba($color: #ffffff, $alpha: 1);
-      width: 100px;
-      height: 50px;
-      margin-right: 5px;
-      background-color: transparent;
-      border-bottom: 2px solid transparent;
-    }
-  }
-  .login-form {
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-
-    label {
-      padding-left: 10px;
-      margin-bottom: 10px;
-    }
-    input {
-      border-color: transparent;
-      border-radius: 50px;
-      width: 100%;
-      height: 50px;
-      outline: none;
-    }
-    .username-field {
-    }
-    .password-field {
-      margin: 15px 0;
-    }
-    .remember-field {
-    }
-    .remember-input {
-      margin-left: 10px;
-      width: 20px;
-      height: 20px;
-    }
-  }
-  .sign-btn {
-    width: 80%;
-    height: 50px;
-    border-radius: 50px;
-    margin-top: 30px;
-    margin-left: 10%;
-    p {
+    h1 {
+      font-size: 2.5;
       text-align: center;
+      color: rgb(62, 147, 243);
+      margin-bottom: 20px;
+    }
+    .firebaseProvider {
+      @include flex(unset, center);
+      margin-bottom: 30px;
+      button {
+        background-color: #ffffff;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
     }
   }
-  .overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgb(187, 167, 167, 0.03);
-    z-index: -999;
+  .email,
+  .password,
+  .firstname,
+  .lastname {
+    position: relative;
+    input {
+      font-size: 1.8rem;
+      background-color: rgb(51 51 53);
+      border: none;
+      border-radius: 10px;
+      padding: 20px;
+      width: 100%;
+      font-weight: 400;
+      outline: none;
+      color: #fff;
+      &::placeholder {
+        color: rgba($color: #fff, $alpha: 0.5);
+      }
+    }
+    svg {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
   }
-
-  form {
-    max-width: 500px;
-    margin: 0 auto;
-    background: #030000;
+  .form {
+    .email,
+    .password {
+      margin: 15px 0;
+      width: 500px;
+    }
   }
-
-  h1 {
-    font-weight: 100;
-    color: white;
+  .submit {
     text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(79, 98, 148);
+    input {
+      color: #fff;
+      font-size: 1.8rem;
+      background-color: rgb(38, 101, 236);
+      border: none;
+      border-radius: 30px;
+      padding: 20px 50px;
+      outline: none;
+      transition: all 0.25s ease;
+      &:hover {
+        background-color: rgb(3, 70, 216);
+      }
+    }
   }
-
-  p {
-    color: #bf1650;
+  .change-tab__form {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 2rem;
+    font-weight: 500;
+    button {
+      font-size: 2rem;
+      font-weight: 500;
+      color: rgb(19, 89, 240);
+      text-decoration: underline;
+    }
   }
-
-  p::before {
-    display: inline;
-    content: "⚠ ";
-  }
-
-  input {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-
-  label {
-    line-height: 2;
-    text-align: left;
-    display: block;
-    margin-bottom: 13px;
-    margin-top: 20px;
-    color: white;
-    font-size: 14px;
-    font-weight: 200;
-  }
-
-  button[type="submit"],
-  input[type="submit"] {
-    background: #ec5990;
-    color: white;
-    text-transform: uppercase;
-    border: none;
-    margin-top: 40px;
-    padding: 20px;
-    font-size: 16px;
-    font-weight: 100;
-    letter-spacing: 10px;
-  }
-
-  button[type="submit"]:hover,
-  input[type="submit"]:hover {
-    background: #bf1650;
-  }
-
-  button[type="submit"]:active,
-  input[type="button"]:active,
-  input[type="submit"]:active {
-    transition: 0.3s all;
-    transform: translateY(3px);
-    border: 1px solid transparent;
-    opacity: 0.8;
-  }
-
-  input:disabled {
-    opacity: 0.4;
-  }
-
-  input[type="button"]:hover {
-    transition: 0.3s all;
-  }
-
-  button[type="submit"],
-  input[type="button"],
-  input[type="submit"] {
-    -webkit-appearance: none;
-  }
-
-  .App {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  button[type="button"] {
-    display: block;
-    appearance: none;
-    background: #333;
-    color: white;
-    border: none;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 4px;
-  }
-
-  hr {
-    margin-top: 30px;
-  }
-
-  button {
-    display: block;
-    appearance: none;
-    margin-top: 40px;
-    border: 1px solid #333;
+  //Sign up
+  .fullname {
+    @include flex(unset, space-between);
     margin-bottom: 20px;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 4px;
+    .firstname,
+    .lastname {
+      width: 250px;
+    }
+  }
+  .email,
+  .password {
+    margin: 15px 0;
+  }
+}
+.noti__login__status {
+  @include overlay(fixed, 0.4, 1);
+  color: #000000;
+  .noti {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    div {
+      margin: auto;
+      text-align: center;
+      h2 {
+      }
+      p {
+        color: #2e2c2c;
+        margin: 20px 0;
+        font-weight: 500;
+      }
+      button {
+        font-size: 1.8rem;
+        background-color: rgba($color: #ec322b, $alpha: 1);
+        color: #ffffff;
+        padding: 5px;
+        border-radius: 10px;
+      }
+    }
   }
 }

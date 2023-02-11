@@ -1,79 +1,67 @@
 import { Fragment, useState } from "react";
 
 import SwiperComp from "../../components/Swiper";
-import MovieTopDaily from "../../components/MovieTopDaily";
+import TopDailyFilm from "../../components/TopDailyFilm";
 import MediaChange from "../../components/MediaChange/MediaChange";
-import MenuRight from "../../components/MenuRight";
-import MenuItem from "./MenuItem";
+import RightBarHome from "./RightBarHome";
+import { useAppSelector } from "../../store/hooks";
 
 import classnames from "classnames/bind";
 import styles from "./Home.module.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/index";
+import { useQuery } from "@tanstack/react-query";
+import { HomeFilms } from "../../shared/types";
+import { getHomeFilms } from "../../service/tmdbApi/Home";
 
 const cx = classnames.bind(styles);
 
 const Home: React.FC = () => {
+  const user = useAppSelector((state) => state.auth.current);
   const [media, setMedia] = useState(() => {
     const currentTab = localStorage.getItem("currentTab");
     return currentTab || "movie";
   });
-
-  const user = useSelector(
-    (state: RootState) => state.currentUserReducer.current
+  const { data, isLoading, error } = useQuery<HomeFilms>(
+    ["movieDaily", media],
+    () => getHomeFilms(media)
   );
-
-  // }, []);
   return (
     <>
       <div className={cx("home")}>
-        <div className={cx("media__change")}>
-          <MediaChange Media={[media, setMedia]} />
-          <div className={cx("user")}>
-            <div>{(user && user["name"]) || "Anonymous"}</div>
-            <div className={cx("logo__user")}>
-              <img
-                src={
-                  (user && user["photoUrl"]) ||
-                  "https://www.sim.edu.vn/en/wp-content/uploads/2019/07/blank-avatar.jpg"
-                }
-                alt=""
-              />
+        <div className="row">
+          <div className="l-9 sm-12 md-12">
+            <div className={cx("media__change")}>
+              <MediaChange media={media} setMedia={setMedia} />
+              <div className={cx("user")}>
+                <div>{(user && user?.displayName) || "Anonymous"}</div>
+                <div className={cx("logo__user")}>
+                  <img
+                    src={
+                      user?.photoURL || require("../../assets/blank-avatar.jpg")
+                    }
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <SwiperComp film={data && data["Trending"]} media={media} />
+            <div className={cx("movie__type")}>
+              <div className={cx("list")}>
+                {data &&
+                  Object.entries(data as HomeFilms)?.map((item, index) => {
+                    return (
+                      <TopDailyFilm
+                        isLoading={isLoading}
+                        key={index}
+                        data={item}
+                      />
+                    );
+                  })}
+              </div>
             </div>
           </div>
-        </div>
-        <SwiperComp media={media} />
-        <div className={cx("movie__type")}>
-          <div className={cx("list")}>
-            {[
-              { title: "Trending", type: "trending", media: media },
-              {
-                title: "Top Rated",
-                type: "top_rated",
-                media: media,
-              },
-              {
-                title: media === "movie" ? "Up Coming" : "On The Air",
-                type: media === "movie" ? "upcoming" : "on_the_air",
-                media: media,
-              },
-            ].map((item, index) => {
-              return (
-                <Fragment key={index}>
-                  <MovieTopDaily
-                    title={item.title}
-                    type={item.type}
-                    media={media}
-                  />
-                </Fragment>
-              );
-            })}
-          </div>
+          <RightBarHome media={media} />
         </div>
       </div>
-      <MenuRight>
-        <MenuItem />
-      </MenuRight>
     </>
   );
 };

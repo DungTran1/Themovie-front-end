@@ -1,4 +1,4 @@
-import { Item, ItemsPage } from "../../shared/types";
+import { getRecommendGenres2Type, Item, ItemsPage } from "../../shared/types";
 import { get } from "../axiosConfig";
 
 export const getSearchKeyword = async (query: string): Promise<string[]> => {
@@ -32,3 +32,12 @@ export const getSearchResult: (
     results,
   };
 };
+export const getRecommendGenres2 =
+  async (): Promise<getRecommendGenres2Type> => {
+    const movieGenres = ((await get("/genre/movie/list")) as any).genres;
+    const tvGenres = ((await get("/genre/tv/list")) as any).genres;
+    return {
+      movieGenres,
+      tvGenres,
+    };
+  };

@@ -4,8 +4,8 @@
   align-items: $alignItem;
   justify-content: $justifyContent;
 }
-@mixin overlay($opacity, $zIndex) {
-  position: absolute;
+@mixin overlay($position, $opacity, $zIndex) {
+  position: $position;
   top: 0;
   right: 0;
   bottom: 0;

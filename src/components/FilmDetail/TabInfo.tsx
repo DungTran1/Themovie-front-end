@@ -1,23 +1,25 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { DetailMovie, DetailTV, FilmInfo } from "../../shared/types";
+
 import { useMediaQuery } from "react-responsive";
 import apiConfig from "../../service/apiConfig";
 
-import Rating from "@mui/material/Rating";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { MdStarRate, MdOutlineStarRate } from "react-icons/md";
+
+import ReadMore from "../Common/ReadMore";
+import { Rating } from "react-simple-star-rating";
 
 import classnames from "classnames/bind";
 import styles from "./FilmDetail.module.scss";
-import ScrollContainer from "react-indiana-drag-scroll";
-import ReadMore from "../Common/ReadMore";
+
 const cx = classnames.bind(styles);
 
 const TabInfo: React.FC<FilmInfo> = ({ detail, ...others }) => {
-  const isMobile = useMediaQuery({ query: "(max-width:420px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:740px)" });
 
   return (
-    <Tabs className={cx("middle__col")}>
+    <Tabs className={`${cx("middle__col")} l-5 md-5 sm-12`}>
       <TabList className={cx("change")}>
         <Tab className={cx("overall")}>Overall</Tab>
         <Tab className={cx("cast")}>Cast</Tab>
@@ -46,7 +48,7 @@ const TabInfo: React.FC<FilmInfo> = ({ detail, ...others }) => {
       </TabPanel>
 
       <TabPanel className={cx("cast__item")}>
-        <ScrollContainer className={cx("scroll")} horizontal={false}>
+        <div className={cx("scroll")}>
           {others?.credits?.map((item: any, index) => {
             return (
               <div key={index} className={cx("celeb")}>
@@ -59,40 +61,38 @@ const TabInfo: React.FC<FilmInfo> = ({ detail, ...others }) => {
               </div>
             );
           })}
-        </ScrollContainer>
+        </div>
       </TabPanel>
-      <TabPanel className={cx("review__item")}>
-        <ScrollContainer
-          className={cx("scroll")}
-          horizontal={false}
-          hideScrollbars={false}
-        >
-          {others?.reviews?.map((item, index) => {
-            return (
-              <div key={index} className={cx("celeb")}>
-                <img
-                  src={apiConfig.w500Image(item.author_details.avatar_path)}
-                  alt="Avatar"
-                />
+      {others.reviews && (
+        <TabPanel className={cx("review__item")}>
+          <div className={cx("scroll")}>
+            {others?.reviews?.map((item, index) => {
+              return (
+                <div key={index} className={cx("celeb")}>
+                  <img
+                    src={apiConfig.w500Image(item.author_details.avatar_path)}
+                    alt="Avatar"
+                  />
 
-                <div className={cx("review__info")}>
-                  <div className={cx("info")}>
-                    <h4 className={cx("name")}>{item.author}</h4>
-                    <Rating
-                      max={10}
-                      defaultValue={item.author_details.rating}
-                      precision={0.5}
-                      emptyIcon={<StarBorderIcon />}
-                      readOnly
-                    />
+                  <div className={cx("review__info")}>
+                    <div className={cx("info")}>
+                      <h4 className={cx("name")}>{item.author}</h4>
+                      <Rating
+                        iconsCount={10}
+                        initialValue={item.author_details.rating}
+                        emptyIcon={<MdOutlineStarRate />}
+                        fillIcon={<MdStarRate />}
+                        readonly={true}
+                      />
+                    </div>
+                    <div className={cx("comment")}>{item.content}</div>
                   </div>
-                  <div className={cx("comment")}>{item.content}</div>
                 </div>
-              </div>
-            );
-          })}
-        </ScrollContainer>
-      </TabPanel>
+              );
+            })}
+          </div>
+        </TabPanel>
+      )}
       {isMobile && <TabPanel>season</TabPanel>}
     </Tabs>
   );

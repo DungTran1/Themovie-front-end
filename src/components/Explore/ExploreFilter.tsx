@@ -1,11 +1,13 @@
 import FilterBy from "./FilterBy";
 import SortBy from "./SortBy";
-
-const ExploreFilter: React.FC = () => {
+interface ExploreFilterProps {
+  media: string;
+}
+const ExploreFilter: React.FC<ExploreFilterProps> = ({ media }) => {
   return (
     <>
       <SortBy />
-      <FilterBy />
+      <FilterBy media={media} />
     </>
   );
 };

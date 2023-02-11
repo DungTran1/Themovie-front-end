@@ -11,6 +11,8 @@ const MovieInfo = () => {
     ["movieDetail", id],
     () => getMovieFullDetail(Number(id))
   );
+
+  if (isError) return <div>Error</div>;
   if (isLoading) {
     return <Loading />;
   }

@@ -2,12 +2,12 @@ import { get } from "../axiosConfig";
 
 import { ConfigType, Item, ItemsPage } from "../../shared/types";
 
-export const getExploreMovie: (
+export const getExploreFilm: (
+  media: string,
   page: number,
   config?: ConfigType
-) => Promise<ItemsPage> = async (page, config = {}) => {
-  console.log(page);
-  const data = await get("/discover/movie", {
+) => Promise<ItemsPage> = async (media, page, config = {}) => {
+  const data = await get("/discover/" + media, {
     ...config,
     page,
   });
@@ -16,7 +16,7 @@ export const getExploreMovie: (
     .filter((item: Item) => item.poster_path)
     .map((item: any) => ({
       ...item,
-      media_type: "movie",
+      media_type: media,
     }));
 
   return {
@@ -25,24 +25,24 @@ export const getExploreMovie: (
   };
 };
 
-export const getExploreTV: (
-  page: number,
-  config?: ConfigType
-) => Promise<ItemsPage> = async (page, config = {}) => {
-  const data = await get("/discover/tv", {
-    ...config,
-    page,
-  });
+// export const getExploreTV: (
+//   page: number,
+//   config?: ConfigType
+// ) => Promise<ItemsPage> = async (page, config = {}) => {
+//   const data = await get("/discover/tv", {
+//     ...config,
+//     page,
+//   });
 
-  const adjustedItems = data.results
-    .filter((item: Item) => item.poster_path)
-    .map((item: any) => ({
-      ...item,
-      media_type: "tv",
-    }));
+//   const adjustedItems = data.results
+//     .filter((item: Item) => item.poster_path)
+//     .map((item: any) => ({
+//       ...item,
+//       media_type: "tv",
+//     }));
 
-  return {
-    ...data,
-    results: adjustedItems,
-  };
-};
+//   return {
+//     ...data,
+//     results: adjustedItems,
+//   };
+// };

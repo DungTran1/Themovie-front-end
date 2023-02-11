@@ -1,0 +1,51 @@
+@use "../../scss" as *;
+.menu {
+  color: $white;
+  font-size: 1.4rem;
+  margin: 20px 0;
+  .type {
+    @include flex(center, space-between);
+    h3 {
+      text-transform: uppercase;
+    }
+  }
+  .wrapper {
+    @include flex(center, unset);
+    margin: 2rem 0;
+    .img {
+      img {
+        min-width: 100px;
+        height: 150px;
+        border-radius: 15px;
+      }
+    }
+    .info {
+      margin: 10px 5px 0 10px;
+      h4 {
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 8px;
+        margin-top: 25px;
+        outline: none;
+        border: 1px solid rgba($color: #403dff, $alpha: 0.8);
+        border-radius: 15px;
+        background-color: transparent;
+        color: rgba($color: #ffffff, $alpha: 0.8);
+      }
+    }
+  }
+}
+
+.seeing__more {
+  max-width: 50%;
+  text-align: center;
+  border-radius: 25px;
+  padding: 15px;
+  background-color: rgba($color: $white, $alpha: 0.1);
+  color: rgba($color: $white, $alpha: 0.5);
+  &:hover {
+    opacity: 0.6;
+  }
+}

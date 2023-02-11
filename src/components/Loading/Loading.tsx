@@ -7,10 +7,11 @@ const Loading = () => {
       width="100"
       color="#4fa94d"
       wrapperStyle={{
-        position: "fixed",
+        position: "absolute",
         top: "50%",
         left: "50%",
         transform: "translate(-50%,-50%)",
+        zIndex: "100",
       }}
       visible={true}
       ariaLabel="three-circles-rotating"

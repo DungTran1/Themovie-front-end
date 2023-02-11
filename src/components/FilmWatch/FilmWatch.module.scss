@@ -1,0 +1,70 @@
+@use "../../scss" as *;
+.watch {
+  padding: 10px;
+  color: rgba($color: $white, $alpha: 0.7);
+  font-size: 1.8rem;
+  .video {
+    height: 500px;
+  }
+  .info-comment {
+    h2 {
+      margin: 10px 10px;
+      color: rgba($color: $white, $alpha: 1);
+    }
+    h2 + div {
+      @include flex(unset, unset);
+      font-size: 1.6rem;
+      .rating {
+        @include flex(center, unset);
+        margin-right: 30px;
+      }
+      span {
+        margin-left: 5px;
+      }
+      svg {
+        font-size: 2.5rem;
+        color: rgba($color: #4fa1ff, $alpha: 1);
+      }
+      .calendar {
+        @include flex(center, unset);
+      }
+    }
+    .genres {
+      margin: 10px 0;
+      button {
+        border-radius: 20px;
+        background-color: #5481eb;
+        color: white;
+        padding: 10px 40px 10px 40px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        &:hover {
+          background-color: #8199d1;
+        }
+      }
+    }
+    .overview {
+      margin: 10px 0;
+      h4 {
+        margin: 10px 0;
+        color: rgba($color: $white, $alpha: 1);
+      }
+      p {
+        line-height: 1.5;
+      }
+    }
+  }
+}
+.rightbar__film {
+  position: relative;
+  padding: 10px 10px;
+  .rightbar__stick {
+    position: sticky;
+    top: 10px;
+    right: 0;
+  }
+}
+@media (max-width: 64em) {
+}
+@media (max-width: 46.25em) {
+}

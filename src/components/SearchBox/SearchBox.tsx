@@ -1,10 +1,12 @@
-import Debounce from "../../hooks";
+import Debounce from "../../store/hooks";
 import TippyHeadless from "@tippyjs/react/headless";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import classnames from "classnames/bind";
 import styles from "./SearchBox.module.scss";
-import { RefAttributes, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import FilmItem from "../FilmItem/FilmItem";
 import { getSearchKeyword } from "../../service/tmdbApi/Search";
 const cx = classnames.bind(styles);
@@ -17,12 +19,6 @@ function SearchBox() {
   const navigate = useNavigate();
   const inputRef = useRef() as any;
   const searchTiming = Debounce(searchInput, 300);
-  const handleSearchKeyWord = (e: React.ChangeEvent) => {
-    // console.log(ref.current);
-    // params.set("query", ref.current);
-    // params.set("page", "1");
-    // setParams(params);
-  };
   useEffect(() => {
     setSearchKeyWord([]);
     if (!(searchTiming as string).trim()) {
@@ -42,11 +38,11 @@ function SearchBox() {
   const handleClickOutside = () => {
     return setShowResult(false);
   };
-  // const handleClearBtn = () => {
-  //   setSearchInput("");
-  //   setSearchKeyWord([]);
-  //   inputRef.current.focus();
-  // };
+  const handleClearBtn = () => {
+    setSearchInput("");
+    setSearchKeyWord([]);
+    inputRef.current.focus();
+  };
   const handleChange = (e: React.ChangeEvent) => {
     const value = (e.target as HTMLInputElement).value;
     if (!value.startsWith(" ")) {
@@ -71,7 +67,7 @@ function SearchBox() {
                     setSearchKeyWord([]);
                   }}
                 >
-                  <BiSearch size={25} />
+                  <BiSearch size={25} color="#0088ff" />
                   <p> {data}</p>
                 </li>
               );
@@ -97,6 +93,11 @@ function SearchBox() {
           onChange={handleChange}
           placeholder="Search"
         />
+        {searchInput && (
+          <div className={cx("close__search")} onClick={handleClearBtn}>
+            <AiOutlineCloseCircle size="25" color="#7e7e7e" />
+          </div>
+        )}
       </div>
     </TippyHeadless>
   );

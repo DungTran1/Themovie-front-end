@@ -1,67 +1,36 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import firebase from "firebase/compat/app";
+import { createSlice } from "@reduxjs/toolkit";
 import "firebase/compat/auth";
-import userApi from "../service/userApiConfig";
+import { User } from "../shared/types";
 
-const FireBaseUser = async () => {
-  const currentUser: any = firebase.auth().currentUser;
-  // await userApi.postLogin("login", {
-  //   name: currentUser.displayName,
-  //   password: "email",
-  //   photoUrl: currentUser.photoURL,
-  // });
-  return {
-    id: currentUser.uid,
-    name: currentUser.displayName,
-    email: currentUser.email,
-    photoUrl: currentUser.photoURL,
-  };
-};
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  photoUrl: string;
-  accessToken: string;
+interface Auth {
+  current: User | null;
 }
-export const getLoginUser: any = createAsyncThunk(
-  "getUserLogin/api",
-  async (payload: User) => {
-    return {
-      id: payload._id,
-      name: payload.name,
-      email: payload.email,
-      photoUrl: payload.photoUrl || "",
-      accessToken: payload.accessToken,
-    };
-  }
-);
-export const getLoginFireBaseUser: any = createAsyncThunk(
-  "getUser/Api",
-  async (payload, thunkApi) => {
-    return FireBaseUser();
-  }
-);
-export const logOut: any = createAsyncThunk("logOut/Api", async () => {
-  return;
-});
-
+const initialState: Auth = {
+  current: null,
+};
 const currentUserSlice = createSlice({
   name: "currentUser",
-  initialState: { current: null, loading: false, error: "" },
-  reducers: {},
-  extraReducers: {
-    [getLoginFireBaseUser.fulfilled]: (state, action) => {
-      state.current = action.payload;
+  initialState: initialState,
+  reducers: {
+    getLoginUser: (state, action) => {
+      state.current = {
+        displayName: action.payload.displayName,
+        email: action.payload.email,
+        emailVerified: false,
+        uid: action.payload.uid,
+        photoURL: action.payload.photoURL || "",
+        accessToken: action.payload.accessToken,
+      };
     },
-    [getLoginUser.fulfilled]: (state, action) => {
-      state.current = action.payload;
-    },
-    [logOut.fulfilled]: (state, action) => {
+    logOut: (state) => {
       state.current = null;
+    },
+    uploadProfile: (state, action) => {
+      (state.current as User).photoURL = action.payload;
     },
   },
 });
-const { reducer } = currentUserSlice;
+const { reducer, actions } = currentUserSlice;
+export const { getLoginUser, logOut, uploadProfile } = actions;
 
 export default reducer;

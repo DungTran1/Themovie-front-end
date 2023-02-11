@@ -1,0 +1,121 @@
+@use "../../scss" as *;
+.season__selection {
+  padding-right: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.6rem;
+  margin-top: 20px;
+  overflow-y: scroll;
+  max-height: 900px;
+}
+.season__wrapper {
+  @include flex(center, unset);
+  margin: 20px 5px;
+  border-radius: 10px;
+  position: relative;
+  &:hover {
+    background-color: rgb(61 109 197);
+  }
+  .img {
+    width: 50%;
+    margin: 0 0 -2px -1px;
+    img {
+      border-radius: 10px;
+    }
+  }
+  .info {
+    margin: 0 5px 0 5px;
+    text-align: center;
+    h4 {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 8px;
+      margin-top: 25px;
+      outline: none;
+      border: 1px solid rgba($color: #403dff, $alpha: 0.8);
+      border-radius: 15px;
+      background-color: transparent;
+      color: rgba($color: #ffffff, $alpha: 0.8);
+    }
+  }
+}
+.onWatch {
+  background-color: rgb(61 109 197);
+}
+.episode__wrapper {
+  margin-left: 30px;
+  overflow-y: scroll;
+  max-height: 300px;
+  li {
+    border-radius: 5px;
+    a {
+      @include flex(center, unset);
+      padding: 10px 0 10px 0;
+      position: relative;
+      .poster {
+        @include flex(unset, unset);
+        margin: 0 5px;
+        .overview {
+          margin: 0 5px;
+          p {
+            word-break: break-all;
+            max-height: 80px;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+          }
+        }
+      }
+      .img {
+        img {
+          min-height: 80px;
+          border-radius: 10px;
+          min-width: 100px;
+          height: 80px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 64em) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .season__selection {
+    display: flex;
+    overflow-y: unset;
+    overflow-x: scroll;
+    & > li {
+      display: flex;
+      align-items: center;
+      ul.episode__wrapper {
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        max-width: 900px;
+        & > li {
+          max-height: 100px;
+          & > a {
+            padding-bottom: 3px;
+            flex-direction: column-reverse;
+            .poster {
+              .overview {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .season__wrapper {
+    width: 200px;
+    .img {
+      width: 40%;
+    }
+  }
+}

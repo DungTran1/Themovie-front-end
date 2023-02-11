@@ -1,0 +1,4 @@
+@use "../../scss" as *;
+.overlay {
+  @include overlay(fixed, 0.7, 9);
+}

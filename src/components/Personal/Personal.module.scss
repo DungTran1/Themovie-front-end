@@ -1,0 +1,68 @@
+@use "../../scss/" as *;
+.film__list {
+  flex: 1;
+  color: $white;
+}
+.list {
+  input {
+    appearance: none;
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 255, 255);
+    z-index: 99;
+    &:checked {
+      appearance: auto;
+      clip-path: circle(50% at 50% 50%);
+    }
+  }
+  label {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    z-index: 999;
+  }
+}
+.header {
+  padding-right: 3rem;
+  margin-bottom: 3rem;
+  @include flex(unset, space-between);
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  & + div {
+    @include flex(center, space-between);
+    margin-right: 50px;
+    font-size: 20px;
+    .edit {
+      cursor: pointer;
+      @include flex(center, unset);
+      div {
+        @include flex(center, unset);
+        margin: 0 10px;
+
+        span {
+          padding-left: 10px;
+        }
+        svg {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .header + div {
+    display: block;
+  }
+}

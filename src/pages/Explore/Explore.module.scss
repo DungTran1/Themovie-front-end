@@ -1,0 +1,35 @@
+@use "../../scss/" as *;
+.explore {
+  flex: 1;
+  color: #fff;
+}
+.header {
+  padding-right: 3rem;
+  margin-bottom: 3rem;
+  @include flex(unset, space-between);
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  // & + div {
+  //   @include flex(center, space-between);
+  //   margin-right: 50px;
+  //   font-size: 20px;
+  //   .edit {
+  //     cursor: pointer;
+  //     @include flex(center, unset);
+
+  //     div {
+  //       @include flex(center, unset);
+  //       margin: 0 10px;
+
+  //       span {
+  //         padding-left: 10px;
+  //       }
+  //       svg {
+  //         font-size: 20px;
+  //       }
+  //     }
+  //   }
+  // }
+}
