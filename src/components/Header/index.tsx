@@ -46,6 +46,7 @@ const Header: React.FC<HeaderProp> = ({ setMenuPopUp }) => {
   } else {
     shrink = false;
   }
+  console.log(user);
   const notify = (e: React.MouseEvent) => {
     if (!user) {
       e.preventDefault();

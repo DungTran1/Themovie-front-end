@@ -8,7 +8,8 @@ const distance = axios.create({
   },
 });
 export const distance2 = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL:
+    process.env.REACT_APP_API_URL || "https://themovie-api.onrender.com/",
   headers: {
     "content-type": "application/json",
   },
@@ -28,11 +29,7 @@ const getUser = async (path: string, config: any = {}) => {
   return res.data;
 };
 const postUser = async (path: string, data: object, config: any = {}) => {
-  const res = await distance2.post(
-    `${process.env.REACT_APP_API_URL}/${path}`,
-    data,
-    config
-  );
+  const res = await distance2.post(path, data, config);
   return res.data;
 };
 
