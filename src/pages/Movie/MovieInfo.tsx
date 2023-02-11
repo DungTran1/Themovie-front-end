@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import FilmDetail from "../../components/FilmDetail/FilmDetail";
 import { FilmInfo } from "../../shared/types";
-import { getMovieFullDetail } from "../../service/tmdbApi/Movie";
+import { getMovieFullDetail } from "../../service/Movie";
 import Loading from "../../components/Loading/Loading";
 
 const MovieInfo = () => {

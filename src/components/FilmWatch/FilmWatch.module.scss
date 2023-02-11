@@ -1,7 +1,7 @@
 @use "../../scss" as *;
 .watch {
   padding: 10px;
-  color: rgba($color: $white, $alpha: 0.7);
+  color: rgba($color: #fff, $alpha: 0.7);
   font-size: 1.8rem;
   .video {
     height: 500px;
@@ -9,7 +9,7 @@
   .info-comment {
     h2 {
       margin: 10px 10px;
-      color: rgba($color: $white, $alpha: 1);
+      color: rgba($color: #fff, $alpha: 1);
     }
     h2 + div {
       @include flex(unset, unset);
@@ -47,7 +47,7 @@
       margin: 10px 0;
       h4 {
         margin: 10px 0;
-        color: rgba($color: $white, $alpha: 1);
+        color: rgba($color: #fff, $alpha: 1);
       }
       p {
         line-height: 1.5;

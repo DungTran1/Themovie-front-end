@@ -1,5 +1,5 @@
 import classnames from "classnames/bind";
-import styles from "../../scss/ModuleScss/Profile.module.scss";
+import styles from "./ProfileComp.module.scss";
 const cx = classnames.bind(styles);
 interface DeletedProps {
   isDeleted: boolean;

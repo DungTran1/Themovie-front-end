@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
-import { getTrendingNow } from "../../service/tmdbApi/Home";
+import { getTrendingNow } from "../../service/Home";
 import { Item } from "../../shared/types";
 import FilmSuggestion from "../../components/FilmSuggestion/FilmSuggestion";
 

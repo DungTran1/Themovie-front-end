@@ -1,21 +1,23 @@
 import { useState } from "react";
-import axios from "axios";
-import { HiOutlineUpload } from "react-icons/hi";
 import { useDispatch } from "react-redux";
-import { uploadProfile } from "../../reducer/currentUserSlice";
-import { postUser } from "../../service/axiosConfig";
-import classnames from "classnames/bind";
-import styles from "../../scss/ModuleScss/Profile.module.scss";
-import { useAppSelector } from "../../store/hooks";
-import { Navigate, useNavigate } from "react-router-dom";
-import Loading from "../Loading/Loading";
+
+import axios from "axios";
+
 import { updateProfile } from "firebase/auth";
+
 import { auth } from "../../shared/firebase";
-const cx = classnames.bind(styles);
+
+import { useAppSelector } from "../../store/hooks";
+
+import { HiOutlineUpload } from "react-icons/hi";
+
+import { uploadProfile } from "../../reducer/currentUserSlice";
+
+import Loading from "../Loading/Loading";
+
 const ProfileImage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const currentUser = auth.currentUser;
   const user = useAppSelector((state) => state.auth.current);
   const changeProfileImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,19 +34,20 @@ const ProfileImage = () => {
           "content-type": "multipart/form-data",
         },
       });
-      const photoUrl = result.data.data.display_url;
-      if (currentUser) {
-        updateProfile(currentUser, {
-          photoURL: photoUrl,
-        })
-          .then(() => {
-            dispatch(uploadProfile(photoUrl));
-            console.log("success");
-            setIsLoading(false);
+      if (result) {
+        const photoUrl = result.data.data.display_url;
+        if (currentUser) {
+          updateProfile(currentUser, {
+            photoURL: photoUrl,
           })
-          .catch((error) => {
-            console.log(error);
-          });
+            .then(() => {
+              dispatch(uploadProfile(photoUrl));
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }
     } catch (error) {
       console.log(error);
@@ -53,28 +56,24 @@ const ProfileImage = () => {
 
   return (
     <>
-      {(!user && <Navigate to="/" replace={true} />) || (
-        <>
-          {isLoading && <Loading />}
-          <h4>Profile photo</h4>
-          <div>
-            <div>
-              <img src={user?.photoURL} alt="" />
-            </div>
-            <label htmlFor="upload-img">
-              <HiOutlineUpload color="rgb(81 121 255)" />
-              <span>Upload new photo </span>
-            </label>
-            <input
-              id="upload-img"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={changeProfileImage}
-            />
-          </div>
-        </>
-      )}
+      {isLoading && <Loading />}
+      <h4>Profile photo</h4>
+      <div>
+        <div>
+          <img src={user?.photoURL} alt="" />
+        </div>
+        <label htmlFor="upload-img">
+          <HiOutlineUpload color="rgb(81 121 255)" />
+          <span>Upload new photo </span>
+        </label>
+        <input
+          hidden
+          id="upload-img"
+          type="file"
+          accept="image/*"
+          onChange={changeProfileImage}
+        />
+      </div>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { EMBED_TO, IMAGE_URL } from "./constants";
-
+import { toast, ToastOptions } from "react-toastify";
 // export const resizeImage = (
 //   imageUrl: string,
 //   width: string = "original"
@@ -29,7 +29,23 @@ export const calculateTimePassed = (time: number): string => {
 
   return "Just now";
 };
-
+const POSITIONTOAST: ToastOptions = {
+  position: "top-right",
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};
+export const toastMessage = (type: string, message: string) => {
+  if (type === "error") {
+    return toast[type](message, POSITIONTOAST);
+  } else if (type === "success") {
+    return toast[type](message, POSITIONTOAST);
+  }
+  return;
+};
 export const convertErrorCodeToMessage = (errorCode: string) => {
   if (errorCode === "auth/email-already-in-use")
     return "Your email is already in use.";

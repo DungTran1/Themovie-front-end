@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import { getSearchResult } from "../../service/tmdbApi/Search";
+import { getSearchResult } from "../../service/Search";
 import { ItemsPage } from "../../shared/types";
 import FilmItem from "../FilmItem/FilmItem";
 import SearchPagin from "./SearchPagin";

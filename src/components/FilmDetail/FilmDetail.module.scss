@@ -19,7 +19,7 @@
     button {
       margin: 0 5px;
       background-color: transparent;
-      border: 3px solid $white;
+      border: 3px solid #fff;
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -44,7 +44,7 @@
   transform: translateY(25%);
   width: 100%;
   z-index: 1;
-  color: $white;
+  color: #fff;
   @include flex(center, unset);
   img {
     border-radius: 10px;
@@ -63,7 +63,7 @@
     background-color: rgba($color: #2e59e7, $alpha: 1);
     border: none;
     padding: 12px 40px 12px 40px;
-    color: $white;
+    color: #fff;
     svg {
       font-size: 3rem;
     }
@@ -78,12 +78,12 @@
   display: flex;
   flex-wrap: wrap;
   font-size: 1.6rem;
-  color: $white;
+  color: #fff;
   .rating__col {
     @include flex(center, center);
     width: 15%;
     margin-top: 120px;
-    border-right: 1px solid rgba($color: $white, $alpha: 0.2);
+    border-right: 1px solid rgba($color: #fff, $alpha: 0.2);
     & > div {
       div {
         margin: 50px;
@@ -102,7 +102,7 @@
     }
   }
   .middle__col {
-    border-right: 1px solid rgba($color: $white, $alpha: 0.2);
+    border-right: 1px solid rgba($color: #fff, $alpha: 0.2);
     width: 410px;
     max-width: 100%;
     padding: 0 1rem 0 3rem;
@@ -112,13 +112,13 @@
         cursor: pointer;
         background-color: transparent;
         font-weight: 600;
-        color: rgba($color: $white, $alpha: 0.6);
+        color: rgba($color: #fff, $alpha: 0.6);
         margin: 1rem;
         padding: 1rem;
         outline: none;
         transition: transform 0.5s ease;
         &:hover {
-          color: rgba($color: $white, $alpha: 1);
+          color: rgba($color: #fff, $alpha: 1);
         }
       }
     }
@@ -136,7 +136,7 @@
       .detail {
         p {
           line-height: 1.5;
-          color: rgba($color: $white, $alpha: 0.5);
+          color: rgba($color: #fff, $alpha: 0.5);
         }
         h4 {
           margin-bottom: 20px;
@@ -224,7 +224,7 @@
     text-align: center;
     font-size: 3rem;
     margin-bottom: 30px;
-    color: $white;
+    color: #fff;
   }
   .genres {
     flex-wrap: wrap;
@@ -233,10 +233,10 @@
     button {
       border-radius: 20px;
       background-color: transparent;
-      border: 1px solid $white;
+      border: 1px solid #fff;
       padding: 10px 15px 10px 15px;
       margin: 10px 10px;
-      color: $white;
+      color: #fff;
     }
   }
 }

@@ -6,7 +6,7 @@ import FilmItem from "../FilmItem/FilmItem";
 import MediaChange from "../MediaChange/MediaChange";
 
 import { ThreeCircles } from "react-loader-spinner";
-import { getExploreFilm } from "../../service/tmdbApi/Explore";
+import { getExploreFilm } from "../../service/Explore";
 import { ItemsPage } from "../../shared/types";
 
 import classnames from "classnames/bind";
@@ -21,8 +21,8 @@ const FilmList: React.FC<FilmListProps> = ({ media, setMedia }) => {
   const config = {
     sort_by: param.get("sort_by"),
     with_genres: param.get("genres"),
-    "with_runtime.gte": param.get("minRunTime"),
-    "with_runtime.lte": param.get("maxRunTime"),
+    "with_runtime.gte": param.get("minRunTime") || 0,
+    "with_runtime.lte": param.get("maxRunTime") || 200,
     "primary_release_date.gte": param.get("from"),
     "primary_release_date.lte": param.get("to"),
     "air_date.gte": param.get("from"),
@@ -36,8 +36,7 @@ const FilmList: React.FC<FilmListProps> = ({ media, setMedia }) => {
     hasNextPage: hasNextPageMovie,
   } = useInfiniteQuery<ItemsPage, Error>(
     ["explore-result-movie", config, media],
-    ({ pageParam = 1, queryKey }) => {
-      // console.log(queryKey);
+    ({ pageParam = 1 }) => {
       return getExploreFilm(media, pageParam, config);
     },
     {

@@ -23,8 +23,6 @@ const FilmSuggestion: React.FC<RightbarFilmsProps> = ({
   films,
   type,
   limitNumber,
-  isLoading,
-  className = "",
 }) => {
   return (
     <>

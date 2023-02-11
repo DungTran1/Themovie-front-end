@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector } from "../../store/hooks";
-import { getPersonal } from "../../service/tmdbApi/HistoryAndBookmark";
+import { getPersonal } from "../../service/HistoryAndBookmark";
 import { useQuery } from "@tanstack/react-query";
 import Personal from "../../components/Personal/Personal";
 import { Item } from "../../shared/types";

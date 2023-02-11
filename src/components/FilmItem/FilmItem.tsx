@@ -29,10 +29,10 @@ const FilmItem: React.FC<Props> = ({
           <div className={cx("card__img")}>
             {(isLoading && (
               <Skeleton
-                height="100%"
+                height="180px"
                 width="100%"
-                borderRadius="1rem"
-                baseColor="transparent"
+                borderRadius="10px"
+                baseColor="grey"
               />
             )) || (
               <LazyLoadImage
@@ -62,15 +62,16 @@ const FilmItem: React.FC<Props> = ({
           className={[className, cx("movie__card")].join(" ")}
           to={"/" + itemPage.media_type + "/" + itemPage?.id}
         >
-          <div className={cx("card__img")}>
-            {(isLoading && (
-              <Skeleton
-                height="100%"
-                width="100%"
-                borderRadius="1rem"
-                baseColor="transparent"
-              />
-            )) || (
+          {isLoading && (
+            <Skeleton
+              height="180px"
+              width="100%"
+              borderRadius="10px"
+              baseColor="grey"
+            />
+          )}
+          {!isLoading && (
+            <div className={cx("card__img")}>
               <LazyLoadImage
                 src={
                   itemPage.media_type === "person"
@@ -80,10 +81,11 @@ const FilmItem: React.FC<Props> = ({
                 effect="blur"
                 alt=""
               />
-            )}
-            {children}
-            {!isLoading && <h4>{itemPage?.title || itemPage.name}</h4>}
-          </div>
+
+              {children}
+              {!isLoading && <h4>{itemPage?.title || itemPage.name}</h4>}
+            </div>
+          )}
           {!isLoading && (
             <div className={cx("vote__averge")}>
               <span> {itemPage?.vote_average?.toFixed(1)}</span>

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { Item } from "../../shared/types";
 import { useQuery } from "@tanstack/react-query";
 import Skeleton from "react-loading-skeleton";
-import { getRecommendGenres2 } from "../../service/tmdbApi/Search";
+import { getRecommendGenres2 } from "../../service/Search";
 import Loading from "../Loading/Loading";
 
 import classnames from "classnames/bind";

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,
@@ -9,11 +10,11 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../../shared/firebase";
-import { toast } from "react-toastify";
-
-import { convertErrorCodeToMessage } from "../../shared/utils";
+import { convertErrorCodeToMessage, toastMessage } from "../../shared/utils";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { postUser } from "../../service/axiosConfig";
+
+import { getLoginUser, logOut } from "../../reducer/currentUserSlice";
 
 import ProfileImage from "../../components/Profile/UploadImage";
 import Name from "../../components/Profile/Name";
@@ -24,10 +25,9 @@ import Email from "../../components/Profile/Email";
 import ConfirmPassword from "../../components/Profile/ConfirmPassword";
 
 import classnames from "classnames/bind";
-import styles from "../../scss/ModuleScss/Profile.module.scss";
-import { getLoginUser, logOut } from "../../reducer/currentUserSlice";
-import { useNavigate } from "react-router-dom";
+import styles from "./Profile.module.scss";
 const cx = classnames.bind(styles);
+
 const Profile = () => {
   const navigate = useNavigate();
   const isTabletMobile = useMediaQuery({ query: "(max-width:64em)" });
@@ -48,6 +48,7 @@ const Profile = () => {
     window.addEventListener("click", clickOutside);
     return () => window.removeEventListener("click", clickOutside);
   }, []);
+
   const dispatch = useAppDispatch();
   const oldPasswordValueRef = useRef<HTMLInputElement>(null!);
   const newPasswordValueRef = useRef<HTMLInputElement>(null!);
@@ -56,15 +57,7 @@ const Profile = () => {
   const reAuthentication = async (type: string) => {
     const oldPassword = oldPasswordValueRef.current.value;
     if (!oldPassword.trim().length) {
-      toast.error("You gotta type something", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastMessage("error", "You must type something!");
       return;
     }
 
@@ -91,15 +84,7 @@ const Profile = () => {
         }
       })
       .catch((error) => {
-        toast.error(convertErrorCodeToMessage(error.code), {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastMessage("error", convertErrorCodeToMessage(error.code));
       });
   };
 
@@ -107,41 +92,17 @@ const Profile = () => {
     const emailValue = emailValueRef.current.value;
 
     if (!emailValue.trim().length) {
-      toast.error("You gotta type something", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastMessage("error", "You gotta type something!");
       return;
     }
     // @ts-ignore
     updateEmail(firebaseUser, emailValue)
-      .then(async (credential) => {
-        toast.success("Change email successfully", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      .then(() => {
+        toastMessage("success", "Change email successfully!");
         dispatch(getLoginUser({ ...currentUser, email: emailValue }));
       })
       .catch((error: any) => {
-        toast.error(convertErrorCodeToMessage(error.code), {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastMessage("error", convertErrorCodeToMessage(error.code));
       })
       .finally(() => {
         setIsRetypedPassword(false);
@@ -152,15 +113,7 @@ const Profile = () => {
     const newDisplayName = displayNameValueRef.current.value;
 
     if (!newDisplayName.trim().length) {
-      toast.error("You gotta type something", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastMessage("error", "You gotta type something");
       return;
     }
     const res = await postUser("personal/displayNameChange", {
@@ -168,97 +121,52 @@ const Profile = () => {
       displayName: newDisplayName,
     });
     if (res.changed) {
-      toast.success("Change name successfully", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastMessage("success", "Change name successfully");
       dispatch(
         getLoginUser({ ...currentUser, displayName: res.changed.displayName })
       );
       setIsRetypedPassword(false);
       setIsUpdatingName(false);
     } else {
-      toast.error("something wrong!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastMessage("error", "something wrong!");
     }
   };
   const changePassword = () => {
     const newPassword = newPasswordValueRef.current.value;
     if (!newPassword.trim().length) {
-      toast.error("You gotta type something", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toastMessage("error", "You gotta type something");
       return;
     }
     // @ts-ignore
     updatePassword(firebaseUser, newPassword)
       .then(async () => {
-        toast.success("Change password successfully", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastMessage("success", "Change password successfully");
         newPasswordValueRef.current.value = "";
       })
       .catch((error: any) => {
-        toast.error(convertErrorCodeToMessage(error.code), {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastMessage("error", convertErrorCodeToMessage(error.code));
       })
       .finally(() => {
         setIsRetypedPassword(false);
         setIsUpdatedPassword(false);
       });
   };
-
   const deleteAccount = () => {
     // @ts-ignore
-    deleteUser(firebaseUser).then(async () => {
-      const res = await postUser("personal/deleteAccount", {
-        uid: currentUser?.uid,
-      });
-      if (res) {
-        toast.success("Delete successfully", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+    deleteUser(firebaseUser)
+      .then(async () => {
+        const res = await postUser("personal/deleteAccount", {
+          uid: currentUser?.uid,
         });
-        dispatch(logOut());
-        navigate("/");
-      }
-    });
+        if (res) {
+          toastMessage("success", "Delete successfully");
+          dispatch(logOut());
+          navigate("/");
+        }
+      })
+      .catch((error: any) => {
+        toastMessage("error", convertErrorCodeToMessage(error.code));
+      });
   };
 
   return (

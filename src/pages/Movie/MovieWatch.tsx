@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import FilmWatch from "../../components/FilmWatch/FilmWatch";
-import { getWatchMovie } from "../../service/tmdbApi/Movie";
+import { getWatchMovie } from "../../service/Movie";
 import { getWatchReturnedType } from "../../shared/types";
 
 const MovieWatch: FC = () => {

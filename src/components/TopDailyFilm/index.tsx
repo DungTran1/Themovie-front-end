@@ -3,6 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Item } from "../../shared/types";
 import FilmItem from "../FilmItem/FilmItem";
+
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import classnames from "classnames/bind";
 import styles from "../../pages/Home/Home.module.scss";
 
@@ -21,7 +25,7 @@ const TopDailyFilm: React.FC<TopDailyFilmProps> = ({ data, isLoading }) => {
         })}
       >
         <div className={cx("type")}>
-          <h2>{data[0]}</h2>
+          {(isLoading && <Skeleton width={50} />) || <h2>{data[0]}</h2>}
         </div>
         <div>
           <Swiper

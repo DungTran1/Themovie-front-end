@@ -3,7 +3,7 @@ import { useAppSelector } from "../../store/hooks";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BiSend } from "react-icons/bi";
 import classnames from "classnames/bind";
-import styles from "../../scss/ModuleScss/Profile.module.scss";
+import styles from "./ProfileComp.module.scss";
 const cx = classnames.bind(styles);
 interface NameProps {
   setIsShowPromptReAuthFor: any;

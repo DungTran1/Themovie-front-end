@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import FilmDetail from "../../components/FilmDetail/FilmDetail";
-import { getTVFullDetail } from "../../service/tmdbApi/TV";
+import { getTVFullDetail } from "../../service/TV";
 import { FilmInfo } from "../../shared/types";
 import Loading from "../../components/Loading/Loading";
 

@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   margin: 20px 0;
-  color: $white;
+  color: #fff;
   font-size: 1.8rem;
   z-index: 999;
   $genres-max-height: 200px;
@@ -141,7 +141,7 @@
   z-index: 99999;
   margin-bottom: 10px;
   input {
-    color: $white;
+    color: #fff;
     border: transparent;
     background-color: rgba($color: #fffdfd, $alpha: 0.2);
     border-radius: 5px;

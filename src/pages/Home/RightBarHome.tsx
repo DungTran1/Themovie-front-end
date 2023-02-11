@@ -1,7 +1,7 @@
 import React from "react";
 
 import SearchBox from "../../components/SearchBox/SearchBox";
-import { getRecommendGenres2 } from "../../service/tmdbApi/Search";
+import { getRecommendGenres2 } from "../../service/Search";
 import { useQuery } from "@tanstack/react-query";
 import { getRecommendGenres2Type } from "../../shared/types";
 import TrendingNow from "./TrendingNow";

@@ -14,6 +14,7 @@ const FilterByRunTime = () => {
   const [maxRunTime, setMaxRunTime] = useState<number>(MAX_RUNTIME);
   const debounceMin = useDebounce(minRunTime, 600);
   const debounceMax = useDebounce(maxRunTime, 600);
+
   useEffect(() => {
     params.set("minRunTime", `${debounceMin}`);
     params.set("maxRunTime", `${debounceMax}`);

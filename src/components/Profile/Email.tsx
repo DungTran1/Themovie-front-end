@@ -4,7 +4,7 @@ import { BiSend } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../store/hooks";
 import classnames from "classnames/bind";
-import styles from "../../scss/ModuleScss/Profile.module.scss";
+import styles from "./ProfileComp.module.scss";
 const cx = classnames.bind(styles);
 interface EmailProps {
   isUpdatingEmail: any;

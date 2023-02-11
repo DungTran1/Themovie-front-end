@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import classnames from "classnames/bind";
-import styles from "../../scss/ModuleScss/Profile.module.scss";
+import styles from "./ProfileComp.module.scss";
 import React from "react";
 const cx = classnames.bind(styles);
 
@@ -18,7 +18,6 @@ const Password: React.FC<PasswordProps> = ({
   setIsShowPromptReAuthFor,
   newPasswordValueRef,
 }) => {
-
   return (
     <div className={cx("change__password")}>
       <h4>Change Password</h4>

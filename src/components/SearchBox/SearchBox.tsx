@@ -8,7 +8,7 @@ import styles from "./SearchBox.module.scss";
 import { useEffect, useRef, useState } from "react";
 
 import FilmItem from "../FilmItem/FilmItem";
-import { getSearchKeyword } from "../../service/tmdbApi/Search";
+import { getSearchKeyword } from "../../service/Search";
 const cx = classnames.bind(styles);
 
 function SearchBox() {

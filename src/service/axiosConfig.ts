@@ -8,7 +8,7 @@ const distance = axios.create({
   },
 });
 export const distance2 = axios.create({
-  baseURL: "https://themovie-api.onrender.com/",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "content-type": "application/json",
   },

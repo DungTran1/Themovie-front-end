@@ -1,6 +1,6 @@
 @use "../../scss" as *;
 .menu {
-  color: $white;
+  color: #fff;
   font-size: 1.4rem;
   margin: 20px 0;
   .type {
@@ -43,8 +43,8 @@
   text-align: center;
   border-radius: 25px;
   padding: 15px;
-  background-color: rgba($color: $white, $alpha: 0.1);
-  color: rgba($color: $white, $alpha: 0.5);
+  background-color: rgba($color: #fff, $alpha: 0.1);
+  color: rgba($color: #fff, $alpha: 0.5);
   &:hover {
     opacity: 0.6;
   }

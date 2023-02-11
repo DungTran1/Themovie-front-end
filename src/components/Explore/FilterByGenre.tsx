@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import classnames from "classnames/bind";
 import styles from "./MenuFilter.module.scss";
 import { useQuery } from "@tanstack/react-query";
-import { getRecommendGenres2 } from "../../service/tmdbApi/Search";
+import { getRecommendGenres2 } from "../../service/Search";
 const cx = classnames.bind(styles);
 interface FilterByGenreProps {
   media: string;
