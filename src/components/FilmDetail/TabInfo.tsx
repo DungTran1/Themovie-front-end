@@ -16,7 +16,7 @@ import styles from "./FilmDetail.module.scss";
 const cx = classnames.bind(styles);
 
 const TabInfo: React.FC<FilmInfo> = ({ detail, ...others }) => {
-  const isMobile = useMediaQuery({ query: "(max-width:740px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:46.25em)" });
 
   return (
     <Tabs className={`${cx("middle__col")} l-5 md-5 sm-12`}>

@@ -1,6 +1,6 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
-import SwiperComp from "../../components/Swiper";
+import HomeIntroSlide from "../../components/HomeIntroSlide";
 import TopDailyFilm from "../../components/TopDailyFilm";
 import MediaChange from "../../components/MediaChange/MediaChange";
 import RightBarHome from "./RightBarHome";
@@ -11,8 +11,7 @@ import styles from "./Home.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { HomeFilms } from "../../shared/types";
 import { getHomeFilms } from "../../service/Home";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+
 const cx = classnames.bind(styles);
 
 const Home: React.FC = () => {
@@ -44,7 +43,7 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </div>
-            <SwiperComp film={data && data["Trending"]} media={media} />
+            <HomeIntroSlide film={data && data["Trending"]} media={media} />
 
             {data &&
               Object.entries(data as HomeFilms)?.map((item, index) => {

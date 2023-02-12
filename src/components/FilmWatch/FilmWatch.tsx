@@ -36,7 +36,7 @@ const FilmWatch: React.FC<FilmWatchProps & getWatchReturnedType> = ({
   currentEpisode,
 }) => {
   const { id }: any = useParams();
-  const isMobileOrTablet = useMediaQuery({ query: "(max-width:1024px)" });
+  const isMobileOrTablet = useMediaQuery({ query: "(max-width:64em)" });
   return (
     <div className="grid">
       <div className="row">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useMediaQuery } from "react-responsive";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -7,13 +7,23 @@ import Header from "../../components/Header";
 import classnames from "classnames/bind";
 import styles from "./DefaultLayout.module.scss";
 import SearchBox from "../../components/SearchBox/SearchBox";
+import Overlay from "../../components/Common/Overlay";
 const cx = classnames.bind(styles);
 interface Props {
   children: JSX.Element;
 }
 const DefaultLayout: React.FC<Props> = ({ children }) => {
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width:1024px)" });
-  const [menuPopUp, setMenuPopUp] = useState(false);
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width:64em)" });
+  const [headerPopUp, setHeaderPopUp] = useState(false);
+  const sideBarRef = useRef() as any;
+  const handleClickOutside = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const { target } = event;
+    if (!sideBarRef.current.contains(target)) {
+      setHeaderPopUp(false);
+    }
+  };
   return (
     <>
       <div className="bg__color">
@@ -24,7 +34,7 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
           })}
         >
           <ToastContainer />
-          <Header setMenuPopUp={setMenuPopUp} />
+          <Header setHeaderPopUp={setHeaderPopUp} />
           {isTabletOrMobile && (
             <div className={`${cx("logo")} row`}>
               <div className={`${cx("logo__img")} md-5 sm-5`}>
@@ -40,7 +50,7 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
                 <SearchBox />
               </div>
               <button
-                onClick={() => setMenuPopUp(!menuPopUp)}
+                onClick={() => setHeaderPopUp(!headerPopUp)}
                 className="md-2 sm-2"
               >
                 <AiOutlineMenu />
@@ -51,10 +61,12 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
         </div>
 
         {isTabletOrMobile && (
-          <div className={cx("mobile__menu", { shrink: menuPopUp })}>
-            <Header setMenuPopUp={setMenuPopUp} />
+          <div className={cx("mobile__menu", { shrink: headerPopUp })}>
+            <Header setHeaderPopUp={setHeaderPopUp} sideBarRef={sideBarRef} />
           </div>
         )}
+        {headerPopUp && <Overlay handleClickOutside={handleClickOutside} />}
+
         <footer className="footer">
           <div>
             <div className="row">

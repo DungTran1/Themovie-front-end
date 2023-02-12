@@ -1,10 +1,4 @@
 :root {
-  $primary: #fe2c55;
-  #fff: #fff;
-  $black: #000;
-  $header-middle-width: 1150px;
-  $text-color: #333;
-  $height-scollbar: min((100vh - 96px) - 60px, 734px);
 }
 * {
   margin: 0;
@@ -44,11 +38,6 @@ img {
 .bg__color {
   background-color: rgba(0, 0, 0, 0.85);
   color: #fff;
-}
-.swiper {
-  // width: 70rem;
-  // height: 34rem;
-  // overflow-y: unset;
 }
 @media (max-width: 740px) {
   .swiper {

@@ -32,7 +32,7 @@ const FilmDetail: React.FC<FilmInfo> = ({
   detail,
   ...others
 }) => {
-  const isMobile = useMediaQuery({ query: "(max-width:740px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:46.25em)" });
   const user = useAppSelector((state) => state.auth.current);
   const { data, refetch } = useQuery(["checkbookmark", detail?.id], () =>
     postUser("bookmark/check/" + detail?.id, { uid: user?.uid })

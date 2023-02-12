@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { MdOutlineExplore } from "react-icons/md";
 import {
@@ -9,33 +11,33 @@ import {
 } from "react-icons/ai";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { RiAccountCircleLine } from "react-icons/ri";
-
 import { FiLogOut, FiLogIn } from "react-icons/fi";
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { signOut } from "firebase/auth";
+
+import { useAppSelector } from "../../store/hooks";
+import { logOut } from "../../reducer/currentUserSlice";
 import { auth } from "../../shared/firebase";
+import { toastMessage } from "../../shared/utils";
+
 import SideBarItem from "./SideBarItem";
-import { useDispatch } from "react-redux";
 
 import classnames from "classnames/bind";
 import styles from "./Header.module.scss";
-import { useMediaQuery } from "react-responsive";
-import { logOut } from "../../reducer/currentUserSlice";
-
-import { signOut } from "firebase/auth";
-import { useAppSelector } from "../../store/hooks";
 const cx = classnames.bind(styles);
+
 interface HeaderProp {
-  setMenuPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+  setHeaderPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+  sideBarRef?: any;
 }
-const Header: React.FC<HeaderProp> = ({ setMenuPopUp }) => {
+const Header: React.FC<HeaderProp> = ({ setHeaderPopUp, sideBarRef }) => {
   const user = useAppSelector((state) => state.auth.current);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const isMobile = useMediaQuery({ query: "(max-width:740px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:46.25em)" });
   const scrollRef = useRef(null);
+
   let shrink: boolean;
   if (
     pathname.includes("discover") ||
@@ -49,13 +51,9 @@ const Header: React.FC<HeaderProp> = ({ setMenuPopUp }) => {
   const notify = (e: React.MouseEvent) => {
     if (!user) {
       e.preventDefault();
-      toast.error("You must to Sign in !", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 1000,
-        closeButton: true,
-      });
+      toastMessage("error", "You must be logged in!");
     } else {
-      setMenuPopUp(false);
+      setHeaderPopUp(false);
     }
   };
   const sideBar = [
@@ -67,21 +65,21 @@ const Header: React.FC<HeaderProp> = ({ setMenuPopUp }) => {
           title: "Home",
           shrink: shrink && !isMobile,
           to: "/",
-          onClick: () => setMenuPopUp(false),
+          onClick: () => setHeaderPopUp(false),
         },
         {
           icon: <MdOutlineExplore />,
           title: "Discover",
           shrink: shrink && !isMobile,
           to: "/discover",
-          onClick: () => setMenuPopUp(false),
+          onClick: () => setHeaderPopUp(false),
         },
         {
           icon: <AiOutlineSearch />,
           title: "Search",
           shrink: shrink && !isMobile,
           to: "/search",
-          onClick: () => setMenuPopUp(false),
+          onClick: () => setHeaderPopUp(false),
         },
       ],
     },
@@ -145,6 +143,7 @@ const Header: React.FC<HeaderProp> = ({ setMenuPopUp }) => {
       className={cx("modal__menu__left", {
         shrink: shrink && !isMobile,
       })}
+      ref={sideBarRef}
     >
       <div ref={scrollRef}>
         {!isMobile && (

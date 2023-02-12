@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.28999e3a.css",
-    "main.js": "/static/js/main.c6b8727a.js",
+    "main.css": "/static/css/main.cdb7455d.css",
+    "main.js": "/static/js/main.9958a90c.js",
     "static/js/787.23170c61.chunk.js": "/static/js/787.23170c61.chunk.js",
     "static/media/1140-morning-night-owl.jpg": "/static/media/1140-morning-night-owl.b740fe1c84b47f6b62aa.jpg",
     "static/media/blank-avatar.jpg": "/static/media/blank-avatar.5a102ca701cf8774e84c.jpg",
     "index.html": "/index.html",
-    "main.28999e3a.css.map": "/static/css/main.28999e3a.css.map",
-    "main.c6b8727a.js.map": "/static/js/main.c6b8727a.js.map",
+    "main.cdb7455d.css.map": "/static/css/main.cdb7455d.css.map",
+    "main.9958a90c.js.map": "/static/js/main.9958a90c.js.map",
     "787.23170c61.chunk.js.map": "/static/js/787.23170c61.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.28999e3a.css",
-    "static/js/main.c6b8727a.js"
+    "static/css/main.cdb7455d.css",
+    "static/js/main.9958a90c.js"
   ]
 }
