@@ -4,6 +4,7 @@ import SignIn from "./SignIn";
 
 import classnames from "classnames/bind";
 import styles from "./Login.module.scss";
+import { ToastContainer } from "react-toastify";
 
 const cx = classnames.bind(styles);
 
@@ -12,6 +13,7 @@ function Login() {
 
   return (
     <>
+      <ToastContainer />
       <video autoPlay muted loop id="myVideo" className={cx("video")}>
         <source
           src="https://raw.githubusercontent.com/DungTran1/video/main/darius-king-theme.mp4"

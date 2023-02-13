@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { MdOutlineExplore } from "react-icons/md";
@@ -149,10 +149,12 @@ const Header: React.FC<HeaderProp> = ({ setHeaderPopUp, sideBarRef }) => {
         {!isMobile && (
           <div className={cx("logo")}>
             <div className={cx("logo__img")}>
-              <img
-                src={require("../../assets/1140-morning-night-owl.jpg")}
-                alt=""
-              />
+              <Link to="/">
+                <img
+                  src={require("../../assets/1140-morning-night-owl.jpg")}
+                  alt=""
+                />
+              </Link>
             </div>
             {(!shrink || isMobile) && (
               <div className={cx("logo__name")}>

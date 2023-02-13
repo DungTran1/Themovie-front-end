@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -11,13 +12,14 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useAppSelector } from "../../store/hooks";
-import { convertErrorCodeToMessage } from "../../shared/utils";
+import { convertErrorCodeToMessage, toastMessage } from "../../shared/utils";
 import { auth } from "../../shared/firebase";
-import classnames from "classnames/bind";
-import styles from "./Login.module.scss";
+
 import ModalNotification from "./ModalNotification";
 import Loading from "../../components/Loading/Loading";
 
+import classnames from "classnames/bind";
+import styles from "./Login.module.scss";
 const cx = classnames.bind(styles);
 
 interface IFormInput {
@@ -25,6 +27,7 @@ interface IFormInput {
   password: string;
 }
 const SignIn = ({ setChangeTab }: any) => {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const currentUser = useAppSelector((state) => state.auth.current);
@@ -34,19 +37,20 @@ const SignIn = ({ setChangeTab }: any) => {
     formState: { errors },
   } = useForm<IFormInput>();
   const onSubmit = async (data: IFormInput) => {
-    if (!data.email.trim() || !data.password.trim()) return;
+    if (!data.email.trim() || !data.password.trim()) {
+      return toastMessage("error", "You must enter all information! ");
+    }
 
     setIsLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(async (userCredential) => {})
+      .then(() => navigate(-1))
       .catch((error) => {
         console.log(error);
         setError(convertErrorCodeToMessage(error.code));
       })
       .finally(() => setIsLoading(false));
-  }; // your form submit function which will invoke after successful validation
+  };
 
-  // console.log(watch("example")); // you can watch individual input by pass the name of the input
   return (
     <>
       {currentUser && (
@@ -83,7 +87,7 @@ const SignIn = ({ setChangeTab }: any) => {
           />
           <AiOutlineMail size={20} />
         </div>
-        {errors.email && <p>wrong email form</p>}
+        {errors.email && <p>Email is invalid</p>}
         <div className={cx("password")}>
           <input
             type="password"

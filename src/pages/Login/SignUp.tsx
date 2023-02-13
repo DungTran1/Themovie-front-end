@@ -12,10 +12,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../shared/firebase";
-import { convertErrorCodeToMessage, getRandomAvatar } from "../../shared/utils";
-import { Navigate, useNavigate } from "react-router-dom";
+import { getRandomAvatar, toastMessage } from "../../shared/utils";
+import { useNavigate } from "react-router-dom";
 import { postUser } from "../../service/axiosConfig";
 import { getLoginUser } from "../../reducer/currentUserSlice";
+import Loading from "../../components/Loading/Loading";
+import { useState } from "react";
 
 const cx = classnames.bind(styles);
 interface IFormInput {
@@ -23,12 +25,12 @@ interface IFormInput {
   lastname: string;
   password: string;
   email: string;
-  example: string;
 }
 
 function SignUp({ setChangeTab }: any) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -37,7 +39,15 @@ function SignUp({ setChangeTab }: any) {
 
   const onSubmit = async (data: IFormInput) => {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
+      if (
+        !data.email.trim() ||
+        !data.password.trim() ||
+        !data.firstname.trim() ||
+        !data.lastname.trim()
+      ) {
+        return toastMessage("error", "You must enter all information! ");
+      }
       const user = (
         await createUserWithEmailAndPassword(auth, data.email, data.password)
       ).user;
@@ -62,23 +72,14 @@ function SignUp({ setChangeTab }: any) {
           .then(() => navigate(-1))
           .catch((error) => {
             console.log(error);
-          });
+          })
+          .finally(() => setIsLoading(false));
       }
-
-      // setDoc(doc(db, "users", user.uid), {
-      //   firstName: values.firstName,
-      //   lastName: values.lastName,
-      //   photoUrl: getRandomAvatar(),
-      //   bookmarks: [],
-      //   recentlyWatch: [],
-      // });
-    } catch (error: any) {
-      console.log(error);
-      // setError(convertErrorCodeToMessage(error.code));
-    }
-  }; // your form submit function which will invoke after successful validation
+    } catch (error: any) {}
+  };
   return (
     <>
+      {isLoading && <Loading />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={cx("fullname")}>
           <div className={cx("firstname")}>
@@ -132,11 +133,17 @@ function SignUp({ setChangeTab }: any) {
           />
           <AiOutlineMail size={20} />
         </div>
-        {errors.email && <p>wrong email form</p>}
+        {errors.email && <p>Email is invalid</p>}
         <div className={cx("password")}>
           <input
+            type="password"
             placeholder="Password"
-            {...register("password", { pattern: /^[A-Za-z]+$/i })}
+            {...register("password", {
+              minLength: {
+                value: 8,
+                message: "Password must have at least 8 characters",
+              },
+            })}
           />
           <RiLockPasswordLine size={20} />
         </div>
