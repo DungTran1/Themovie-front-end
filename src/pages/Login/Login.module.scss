@@ -41,7 +41,6 @@
     margin-top: 30px;
     padding: 20px 50px;
     h1 {
-      font-size: 2.5;
       text-align: center;
       color: rgb(62, 147, 243);
       margin-bottom: 20px;
@@ -87,7 +86,6 @@
     .email,
     .password {
       margin: 15px 0;
-      width: 500px;
     }
   }
   .submit {
@@ -124,7 +122,7 @@
     margin-bottom: 20px;
     .firstname,
     .lastname {
-      width: 250px;
+      width: 48%;
     }
   }
   .email,
@@ -160,6 +158,24 @@
         padding: 5px;
         border-radius: 10px;
       }
+    }
+  }
+}
+@media (max-width: 46.25em) {
+  .wrapper {
+    .container {
+      width: 80%;
+      .fullname {
+        display: block;
+        .firstname,
+        .lastname {
+          width: 100%;
+          margin: 20px 0;
+        }
+      }
+    }
+    .content {
+      padding: 0;
     }
   }
 }
