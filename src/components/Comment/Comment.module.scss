@@ -148,7 +148,9 @@
   .feature {
     @include flex(center, space-between);
     margin-top: 10px;
+    margin-left: -5px;
     div {
+      margin-left: 5px;
       cursor: pointer;
     }
     .reaction {

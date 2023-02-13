@@ -8,7 +8,7 @@ const instance = axios.create({
   },
 });
 const instance2 = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://localhost:5000",
   headers: {
     "content-type": "application/json",
   },

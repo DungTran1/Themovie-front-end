@@ -32,7 +32,7 @@ const Comment: React.FC<CommentProp> = ({ id: movieId }) => {
   );
   const [numberOfComments, setNumberOfComments] = useState<number>(5);
 
-  const parentComment = data?.comment.filter((e) => !e.comments);
+  const parentComment = data?.comment?.filter((e) => !e.comments);
   const handleSendComment = async (id: any) => {
     const content = inputRef.current[id].value;
     const res = await postUser("comment/add/" + movieId, {
