@@ -21,7 +21,6 @@ const Reply: React.FC<ReplyProps> = ({
   user,
   commentOption,
 }) => {
-  // console.log(comment);
   const [numberOfComments, setNumberOfComments] = useState(5);
   const loadMoreComment = async () => {
     if (comment) {

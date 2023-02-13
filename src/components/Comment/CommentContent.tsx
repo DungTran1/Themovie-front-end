@@ -234,11 +234,12 @@ const CommentContent: React.FC<CommentContentProp> = ({
           }}
         >
           <div style={{ color: colorReacted }}>
-            {(reacted && (
+            {(user && reacted && (
               <p onClick={() => handleReact(comment?._id, reacted.type)}>
                 {reacted.type.charAt(0).toUpperCase() + reacted.type.slice(1)}
               </p>
-            )) || <p>Reaction</p>}
+            )) ||
+              (user && <p>Reaction</p>)}
           </div>
         </Tippy>
         {className !== "child" && user && (
