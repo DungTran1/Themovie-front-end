@@ -36,8 +36,9 @@ const Personal: React.FC<PersonalProps> = ({
   const [check, setCheck] = useState<number[]>([]);
   const checkRef = useRef([]) as any;
 
-  const handleChecked = (e: any) => {
+  const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = Number(e.target.value);
+    e.stopPropagation();
     if (check.includes(id) && Number.isInteger(id)) {
       setCheck((prev) => {
         const newCheck = [...prev];
