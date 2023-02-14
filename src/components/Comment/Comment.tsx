@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { IoSendSharp } from "react-icons/io5";
 import { useAppSelector } from "../../store/hooks";
@@ -22,7 +22,7 @@ const Comment: React.FC<CommentProp> = ({ id: movieId }) => {
   const user = useAppSelector((state) => state.auth.current);
   const inputRef: any = useRef([]);
   const [commentOption, setCommentOption] = useState("lastest");
-  const { data, refetch, isFetching } = useQuery<{ comment: UserComment[] }>(
+  const { data, refetch } = useQuery<{ comment: UserComment[] }>(
     ["comment"],
     () => postUser("comment", { movieId: movieId }),
     {
