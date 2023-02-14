@@ -1,10 +1,7 @@
 @use "../../scss" as *;
 @mixin HoverIcon($color) {
-  color: rgba($color: $color, $alpha: 0.9);
+  color: rgba($color: $color, $alpha: 0.5);
   border-radius: 50%;
-  transform: translateY(-10px) rotate(-10deg);
-}
-.comment {
 }
 .wrapper {
   .parent {
@@ -123,8 +120,6 @@
         border: transparent;
         outline: none;
       }
-      textArea {
-      }
     }
   }
   .hide {
@@ -149,7 +144,7 @@
     @include flex(center, space-between);
     margin-top: 10px;
     margin-left: -10px;
-    div {
+    & > div {
       margin-left: 10px;
       cursor: pointer;
     }
@@ -275,12 +270,12 @@
   }
 }
 $colorHover: (
-  "heart": #fa5c5c,
-  "like": #6084fc,
-  "haha": #fdfb67,
-  "angry": #a446d3,
-  "sad": #52d3a8,
-  "surprise": #e99847,
+  "heart": #f06969,
+  "like": #7796fd,
+  "haha": #fcfa8f,
+  "angry": #d28cf5,
+  "sad": #8ef1d0,
+  "surprise": #f0ad6a,
 );
 @each $name, $color in $colorHover {
   .#{$name}Icon {
@@ -303,5 +298,16 @@ $colorHover: (
     font-size: 1.5rem;
     font-weight: 700;
     padding: 10px;
+  }
+}
+@media (max-width: 46.25em) {
+  .comment__content {
+    .feature {
+      .reaction {
+        div {
+          margin: 10px;
+        }
+      }
+    }
   }
 }

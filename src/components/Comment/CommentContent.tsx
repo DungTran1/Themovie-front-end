@@ -218,7 +218,7 @@ const CommentContent: React.FC<CommentContentProp> = ({
           duration={[500, 500]}
           render={(attrs) => {
             return (
-              <div className={cx("reaction")} tabIndex={-1} {...attrs}>
+              <div className={cx("reaction")}>
                 {Object.entries(count).map((i, index) => {
                   return (
                     <div

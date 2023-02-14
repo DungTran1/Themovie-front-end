@@ -30,7 +30,11 @@
   margin-bottom: 20px;
   .logo__name {
     padding-left: 1rem;
+    & > :first-child {
+      color: #fff;
+    }
   }
+
   .lastname {
     color: rgba($color: #002ec4, $alpha: 1);
   }

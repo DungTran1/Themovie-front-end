@@ -1,14 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { ToastContainer } from "react-toastify";
 import { useMediaQuery } from "react-responsive";
 import { AiOutlineMenu } from "react-icons/ai";
-import { CiFacebook } from "react-icons/ci";
+
 import Header from "../../components/Header";
-import classnames from "classnames/bind";
-import styles from "./DefaultLayout.module.scss";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Overlay from "../../components/Common/Overlay";
+
+import classnames from "classnames/bind";
+import styles from "./DefaultLayout.module.scss";
 const cx = classnames.bind(styles);
+
 interface Props {
   children: JSX.Element;
 }
@@ -37,7 +41,7 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
           <Header setHeaderPopUp={setHeaderPopUp} />
           {isTabletOrMobile && (
             <div className={`${cx("logo")} row`}>
-              <div className={`${cx("logo__img")} md-5 sm-5`}>
+              <Link to="/" className={`${cx("logo__img")} md-5 sm-5`}>
                 <img
                   src={require("../../assets/1140-morning-night-owl.jpg")}
                   alt=""
@@ -45,7 +49,7 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
                 <p className={cx("firtname")}>
                   Night<span className={cx("lastname")}>Owl</span>
                 </p>
-              </div>
+              </Link>
               <div className="md-5 sm-5">
                 <SearchBox />
               </div>

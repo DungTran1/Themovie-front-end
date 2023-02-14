@@ -147,14 +147,12 @@ const Header: React.FC<HeaderProp> = ({ setHeaderPopUp, sideBarRef }) => {
     >
       <div ref={scrollRef}>
         {!isMobile && (
-          <div className={cx("logo")}>
+          <Link to="/" className={cx("logo")}>
             <div className={cx("logo__img")}>
-              <Link to="/">
-                <img
-                  src={require("../../assets/1140-morning-night-owl.jpg")}
-                  alt=""
-                />
-              </Link>
+              <img
+                src={require("../../assets/1140-morning-night-owl.jpg")}
+                alt=""
+              />
             </div>
             {(!shrink || isMobile) && (
               <div className={cx("logo__name")}>
@@ -162,7 +160,7 @@ const Header: React.FC<HeaderProp> = ({ setHeaderPopUp, sideBarRef }) => {
                 <span className={cx("lastname")}>Owl</span>
               </div>
             )}
-          </div>
+          </Link>
         )}
         {sideBar.map((item, index) => {
           return (
