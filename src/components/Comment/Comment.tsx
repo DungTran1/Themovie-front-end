@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { UserComment } from "../../shared/types";
 import { Link } from "react-router-dom";
 import { postUser } from "../../service/axiosConfig";
+import Loading from "../Loading/Loading";
 
 const cx = classnames.bind(styles);
 
@@ -22,7 +23,7 @@ const Comment: React.FC<CommentProp> = ({ id: movieId }) => {
   const user = useAppSelector((state) => state.auth.current);
   const inputRef: any = useRef([]);
   const [commentOption, setCommentOption] = useState("lastest");
-  const { data, refetch } = useQuery<{ comment: UserComment[] }>(
+  const { data, refetch, isLoading } = useQuery<{ comment: UserComment[] }>(
     ["comment"],
     () => postUser("comment", { movieId: movieId }),
     {
@@ -118,7 +119,8 @@ const Comment: React.FC<CommentProp> = ({ id: movieId }) => {
         )}
         <div className={cx("wrapper")}>
           <div className={cx("comment")}>
-            {data && parentComment && (
+            {isLoading && <Loading />}
+            {!isLoading && data && parentComment && (
               <CommentUser
                 commentOption={commentOption}
                 movieId={movieId}

@@ -11,7 +11,7 @@ const Loading = () => {
         top: "50%",
         left: "50%",
         transform: "translate(-50%,-50%)",
-        zIndex: "100",
+        zIndex: "999",
       }}
       visible={true}
       ariaLabel="three-circles-rotating"

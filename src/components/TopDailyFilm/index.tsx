@@ -51,7 +51,7 @@ const TopDailyFilm: React.FC<TopDailyFilmProps> = ({ data, isLoading }) => {
             {data[1]?.map((itm, idx) => {
               return (
                 <SwiperSlide key={idx}>
-                  <FilmItem itemPage={itm} isLoading={isLoading} />
+                  <FilmItem itemPage={itm} />
                 </SwiperSlide>
               );
             })}

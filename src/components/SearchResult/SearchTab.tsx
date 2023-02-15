@@ -9,7 +9,7 @@ const SearchTab = ({ currentTab }: { currentTab: string }) => {
   const [openSearchFilter, setOpenSearchFilter] = useState(true);
   return (
     <div className={` l-3 sm-12`}>
-      <div className={`${cx("search", { openSearchFilter })} sm-o-1`}>
+      <div className={`${cx("search", { openSearchFilter })} sm-o-3`}>
         <div className={cx("search__tab")}>
           <p>Search Results</p>
           <button onClick={() => setOpenSearchFilter((prev) => !prev)}>

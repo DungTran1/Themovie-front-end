@@ -4,6 +4,7 @@
   border-radius: 50%;
 }
 .wrapper {
+  position: relative;
   .parent {
     @include flex(unset, unset);
     margin: 20px 0;

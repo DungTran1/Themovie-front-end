@@ -214,7 +214,7 @@ const CommentContent: React.FC<CommentContentProp> = ({
           placement="top"
           interactive
           allowHTML
-          hideOnClick={true}
+          hideOnClick="toggle"
           duration={[500, 500]}
           render={(attrs) => {
             return (

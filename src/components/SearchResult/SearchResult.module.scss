@@ -2,7 +2,7 @@
 .search {
   height: fit-content;
   padding: 5px 10px;
-  width: 80%;
+  margin-bottom: 5px;
   max-height: 40px;
   overflow: hidden;
   color: rgba($color: #fff, $alpha: 0.9);
@@ -16,7 +16,6 @@
   }
   .search__tab {
     @include flex(center, space-between);
-
     & + div {
       margin-top: 5px;
       border-top: 1px solid #fff;
@@ -67,17 +66,14 @@
       width: 40px;
       height: 40px;
       margin: 0 5px;
+      &.currentTab {
+        background-color: #2387df;
+      }
     }
-  }
-  a.currentTab {
-    background-color: rgb(40, 126, 197);
   }
 }
 @media (max-width: 46.25em) {
-  .pagin {
-    div {
-      a {
-      }
-    }
+  .search {
+    width: 50%;
   }
 }

@@ -59,7 +59,7 @@ const SearchResult = ({
                 data.results.map((item) => {
                   return (
                     <li key={item.id} className="l-3 md-4 sm-6">
-                      <FilmItem itemPage={item} isLoading={isLoading} />
+                      <FilmItem itemPage={item} />
                     </li>
                   );
                 })}

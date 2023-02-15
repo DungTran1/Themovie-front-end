@@ -1,6 +1,6 @@
 @use "../../scss" as *;
 .home {
-  padding: 1rem;
+  padding: 10px;
   color: #fff;
   flex: 1;
 }
@@ -8,17 +8,16 @@
   @include flex(center, space-between);
   .user {
     @include flex(center, unset);
-    margin-right: 1rem;
+    margin-right: 20px;
     font-size: 1.6rem;
     font-weight: 500;
   }
   .logo__user {
     img {
-      margin-left: 3rem;
-      width: 3rem;
-      height: 3rem;
+      margin-left: 15px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-
       object-fit: cover;
     }
   }

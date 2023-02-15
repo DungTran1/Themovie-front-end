@@ -3,26 +3,27 @@
   position: relative;
   color: #fff;
   margin-bottom: 20px;
+  transform: scale(1) translateY(10px);
+  transition: transform 0.3s ease;
   z-index: 9;
+  display: block;
+  &:hover {
+    transform: scale(1.03) translateY(5px);
+  }
   .card__img {
     position: relative;
     background-color: rgba($color: #ffffff, $alpha: 0.05);
-    border-radius: 10px;
-    width: 18.2rem;
-    transform: scale(1) translateY(10px);
-    transition: transform 0.3s ease;
-    &:hover {
-      transform: scale(1.03) translateY(5px);
-    }
+    border-radius: 5px;
+    width: 172px;
+
     h4 {
+      padding: 0 2px;
       white-space: nowrap;
       overflow: hidden;
       text-align: center;
       font-size: 1.6rem;
-      height: 50px;
-      width: 181px;
       text-overflow: ellipsis;
-      line-height: 50px;
+      line-height: 30px;
     }
   }
   .vote__averge {
@@ -44,8 +45,9 @@
   }
 
   img {
-    height: 28rem;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    height: 260px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
 }

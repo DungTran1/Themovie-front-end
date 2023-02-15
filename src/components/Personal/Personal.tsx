@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 import FilmItem from "../../components/FilmItem/FilmItem";
 import MediaChange from "../../components/MediaChange/MediaChange";
@@ -13,6 +13,7 @@ import { useAppSelector } from "../../store/hooks";
 
 import classnames from "classnames/bind";
 import styles from "./Personal.module.scss";
+import Loading from "../Loading/Loading";
 const cx = classnames.bind(styles);
 
 interface PersonalProps {
@@ -107,35 +108,32 @@ const Personal: React.FC<PersonalProps> = ({
             )}
           </div>
         </div>
+        {isLoading && <Loading />}
         <div className={`${cx("list")} row`}>
-          {film?.map((itm, index) => {
-            return (
-              <>
-                <FilmItem
-                  key={index}
-                  itemPage={itm}
-                  isLoading={isLoading}
-                  className="l-3 sm-6"
-                >
-                  {edit && (
-                    <>
-                      <label htmlFor={itm.id.toString()}></label>
-                      <input
-                        id={itm.id.toString()}
-                        ref={(el) => (checkRef.current[itm.id] = el)}
-                        checked={check.includes(itm.id)}
-                        className={cx("checkbox")}
-                        type="checkbox"
-                        value={itm.id}
-                        onChange={handleChecked}
-                      />
-                      {/* <Overlay /> */}
-                    </>
-                  )}
-                </FilmItem>
-              </>
-            );
-          })}
+          {!isLoading &&
+            film?.map((itm) => {
+              return (
+                <React.Fragment key={itm.id}>
+                  <FilmItem itemPage={itm} className="l-3 sm-6">
+                    {edit && (
+                      <>
+                        <label htmlFor={itm.id.toString()}></label>
+                        <input
+                          id={itm.id.toString()}
+                          ref={(el) => (checkRef.current[itm.id] = el)}
+                          checked={check.includes(itm.id)}
+                          className={cx("checkbox")}
+                          type="checkbox"
+                          value={itm.id}
+                          onChange={handleChecked}
+                        />
+                        {/* <Overlay /> */}
+                      </>
+                    )}
+                  </FilmItem>
+                </React.Fragment>
+              );
+            })}
         </div>
       </div>
     </>

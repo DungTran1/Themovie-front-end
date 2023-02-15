@@ -1,65 +1,50 @@
 import { Link } from "react-router-dom";
 import apiConfig from "../../service/apiConfig";
-import { AiFillStar } from "react-icons/ai";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import classnames from "classnames/bind";
-import styles from "./FilmItem.module.scss";
 import { Item } from "../../shared/types";
 
+import { AiFillStar } from "react-icons/ai";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+import classnames from "classnames/bind";
+import styles from "./FilmItem.module.scss";
 const cx = classnames.bind(styles);
+
 interface Props {
   children?: React.ReactNode;
   itemPage: Item;
-  isLoading: boolean;
   className?: string;
 }
-const FilmItem: React.FC<Props> = ({
-  itemPage,
-  isLoading,
-  className,
-  children,
-}) => {
+const FilmItem: React.FC<Props> = ({ itemPage, className, children }) => {
   const Element = children ? "div" : Link;
+
   return (
     <>
       <Element
         className={[className, cx("movie__card")].join(" ")}
         to={!children ? "/" + itemPage.media_type + "/" + itemPage?.id : "#"}
       >
-        {isLoading && (
-          <Skeleton
-            height="180px"
-            width="100%"
-            borderRadius="10px"
-            baseColor="grey"
+        <div className={cx("card__img")}>
+          <LazyLoadImage
+            src={
+              itemPage.media_type === "person"
+                ? apiConfig.w500Image(itemPage.profile_path)
+                : apiConfig.w500Image(itemPage.poster_path)
+            }
+            effect="blur"
+            alt=""
           />
-        )}
-        {!isLoading && (
-          <div className={cx("card__img")}>
-            <LazyLoadImage
-              src={
-                itemPage.media_type === "person"
-                  ? apiConfig.w500Image(itemPage.profile_path)
-                  : apiConfig.w500Image(itemPage.poster_path)
-              }
-              effect="blur"
-              alt=""
-            />
 
-            {children}
-            {!isLoading && <h4>{itemPage?.title || itemPage.name}</h4>}
-          </div>
-        )}
-        {!isLoading && (
-          <div className={cx("vote__averge")}>
-            <span> {itemPage?.vote_average?.toFixed(1)}</span>
+          {children}
+          <h4>{itemPage?.title || itemPage.name}</h4>
+        </div>
 
-            <AiFillStar />
-          </div>
-        )}
+        <div className={cx("vote__averge")}>
+          <span> {itemPage?.vote_average?.toFixed(1)}</span>
+
+          <AiFillStar />
+        </div>
       </Element>
     </>
   );

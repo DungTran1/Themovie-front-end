@@ -7,6 +7,7 @@ const instance = axios.create({
     "content-type": "application/json",
   },
 });
+//process.env.REACT_APP_API_URL
 const instance2 = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {

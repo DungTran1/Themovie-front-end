@@ -43,6 +43,7 @@
     @include flex(center, space-between);
     margin-right: 50px;
     font-size: 20px;
+    flex-wrap: wrap;
     .edit {
       cursor: pointer;
       @include flex(center, unset);
@@ -58,11 +59,5 @@
         }
       }
     }
-  }
-}
-
-@media (max-width: 520px) {
-  .header + div {
-    display: block;
   }
 }

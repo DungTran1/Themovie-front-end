@@ -13,7 +13,7 @@ import AuthProtect from "./components/Common/AuthProtect";
 import Profile from "./pages/Profile/Profile";
 import Bookmark from "./pages/Bookmark/Bookmark";
 import Search from "./pages/Search/Search";
-import Explore from "./pages/Explore/Explore";
+import Discover from "./pages/Discover/Discover";
 import MovieWatch from "./pages/Movie/MovieWatch";
 import TVInfo from "./pages/TV/TVInfo";
 import Home from "./pages/Home";
@@ -90,7 +90,7 @@ function App() {
           path="discover"
           element={
             <DefaultLayout>
-              <Explore />
+              <Discover />
             </DefaultLayout>
           }
         />

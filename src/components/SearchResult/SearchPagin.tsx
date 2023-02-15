@@ -1,20 +1,20 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+
 import classnames from "classnames/bind";
 import styles from "./SearchResult.module.scss";
+const cx = classnames.bind(styles);
+
 interface PaginationProps {
   currentPage: number;
   onChangePage: (page: number) => string;
   maxPage: number;
 }
-const cx = classnames.bind(styles);
 const SearchPagin: React.FC<PaginationProps> = ({
   currentPage,
   onChangePage,
   maxPage,
 }) => {
-  const [searchParams] = useSearchParams();
-  console.log(searchParams.get("page"), currentPage);
   return (
     <div className={cx("pagin")}>
       <div>
@@ -27,7 +27,11 @@ const SearchPagin: React.FC<PaginationProps> = ({
         {currentPage < 5 ? (
           <>
             {new Array(maxPage < 5 ? maxPage : 5).fill("").map((_, index) => (
-              <Link key={index} to={onChangePage(index + 1)}>
+              <Link
+                key={index}
+                to={onChangePage(index + 1)}
+                className={cx(currentPage === index + 1 && "currentTab")}
+              >
                 <div>
                   <p>{index + 1}</p>
                 </div>
@@ -36,7 +40,10 @@ const SearchPagin: React.FC<PaginationProps> = ({
             {maxPage > 5 && (
               <>
                 {maxPage > 6 && <span>...</span>}
-                <Link to={onChangePage(maxPage)}>
+                <Link
+                  to={onChangePage(maxPage)}
+                  className={cx(currentPage === maxPage && "currentTab")}
+                >
                   <div>
                     <p>{maxPage}</p>
                   </div>
@@ -46,7 +53,10 @@ const SearchPagin: React.FC<PaginationProps> = ({
           </>
         ) : currentPage > maxPage - 4 ? (
           <>
-            <Link to={onChangePage(1)}>
+            <Link
+              to={onChangePage(1)}
+              className={cx(currentPage === 1 && "currentTab")}
+            >
               <p> 1</p>
             </Link>
             <span>. . .</span>
@@ -54,9 +64,9 @@ const SearchPagin: React.FC<PaginationProps> = ({
               <Link
                 key={index}
                 to={onChangePage(maxPage - 4 + index)}
-                // className={cx({
-                //   currentTab: Number(searchParams.get("page")) === currentPage,
-                // })}
+                className={cx(
+                  currentPage === maxPage - 4 + index && "currentTab"
+                )}
               >
                 <p> {maxPage - 4 + index}</p>
               </Link>
@@ -64,7 +74,10 @@ const SearchPagin: React.FC<PaginationProps> = ({
           </>
         ) : (
           <>
-            <Link to={onChangePage(1)}>
+            <Link
+              to={onChangePage(1)}
+              className={cx(currentPage === 1 && "blue")}
+            >
               <div>
                 <p>1</p>
               </div>
@@ -74,9 +87,9 @@ const SearchPagin: React.FC<PaginationProps> = ({
               <Link
                 key={index}
                 to={onChangePage(currentPage - 2 + index)}
-                className={cx({
-                  currentTab: index === currentPage,
-                })}
+                className={cx(
+                  currentPage === currentPage - 2 + index && "currentTab"
+                )}
               >
                 <p> {currentPage - 2 + index}</p>
               </Link>
@@ -84,9 +97,7 @@ const SearchPagin: React.FC<PaginationProps> = ({
             <span>...</span>
             <Link
               to={onChangePage(maxPage)}
-              // className={cx({
-              //   currentTab: Number(searchParams.get("page")) === currentPage,
-              // })}
+              className={cx(currentPage === maxPage && "currentTab")}
             >
               <p>{maxPage}</p>
             </Link>

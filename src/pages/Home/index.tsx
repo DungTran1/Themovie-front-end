@@ -11,6 +11,7 @@ import styles from "./Home.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { HomeFilms } from "../../shared/types";
 import { getHomeFilms } from "../../service/Home";
+import Loading from "../../components/Loading/Loading";
 
 const cx = classnames.bind(styles);
 
@@ -43,10 +44,13 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </div>
-            <HomeIntroSlide film={data && data["Trending"]} media={media} />
-
-            {data &&
-              Object.entries(data as HomeFilms)?.map((item, index) => {
+            {isLoading && <Loading />}
+            {!isLoading && data && (
+              <HomeIntroSlide film={data && data["Trending"]} media={media} />
+            )}
+            {!isLoading &&
+              data &&
+              Object.entries(data as HomeFilms).map((item, index) => {
                 return (
                   <TopDailyFilm isLoading={isLoading} key={index} data={item} />
                 );

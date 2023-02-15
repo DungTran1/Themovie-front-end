@@ -1,10 +1,11 @@
 import { useSearchParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+
 import SearchResult from "../../components/SearchResult/SearchResult";
 import SearchBox from "../../components/SearchBox/SearchBox";
 
 import classnames from "classnames/bind";
 import styles from "./Search.module.scss";
-import { useMediaQuery } from "react-responsive";
 const cx = classnames.bind(styles);
 
 const Search = () => {
