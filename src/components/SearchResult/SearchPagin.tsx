@@ -76,7 +76,7 @@ const SearchPagin: React.FC<PaginationProps> = ({
           <>
             <Link
               to={onChangePage(1)}
-              className={cx(currentPage === 1 && "blue")}
+              className={cx(currentPage === 1 && "currentTab")}
             >
               <div>
                 <p>1</p>
