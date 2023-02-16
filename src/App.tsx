@@ -35,7 +35,6 @@ function App() {
         const result = dispatch(getLoginUser(user));
         const unwrap = unwrapResult(result);
         console.log("unwrap", unwrap);
-        // }
       }
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.

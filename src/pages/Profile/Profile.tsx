@@ -7,14 +7,18 @@ import {
   updatePassword,
   updateEmail,
   deleteUser,
+  updateProfile,
 } from "firebase/auth";
 
 import { auth } from "../../shared/firebase";
 import { convertErrorCodeToMessage, toastMessage } from "../../shared/utils";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { postUser } from "../../service/axiosConfig";
 
-import { getLoginUser, logOut } from "../../reducer/currentUserSlice";
+import {
+  changeDisplayName,
+  changeEmailName,
+  logOut,
+} from "../../reducer/currentUserSlice";
 
 import ProfileImage from "../../components/Profile/UploadImage";
 import Name from "../../components/Profile/Name";
@@ -99,7 +103,7 @@ const Profile = () => {
     updateEmail(firebaseUser, emailValue)
       .then(() => {
         toastMessage("success", "Change email successfully!");
-        dispatch(getLoginUser({ ...currentUser, email: emailValue }));
+        dispatch(changeEmailName(emailValue));
       })
       .catch((error: any) => {
         toastMessage("error", convertErrorCodeToMessage(error.code));
@@ -116,19 +120,21 @@ const Profile = () => {
       toastMessage("error", "You gotta type something");
       return;
     }
-    const res = await postUser("personal/displayNameChange", {
-      uid: firebaseUser?.uid,
-      displayName: newDisplayName,
-    });
-    if (res.changed) {
-      toastMessage("success", "Change name successfully");
-      dispatch(
-        getLoginUser({ ...currentUser, displayName: res.changed.displayName })
-      );
-      setIsRetypedPassword(false);
-      setIsUpdatingName(false);
-    } else {
-      toastMessage("error", "something wrong!");
+    if (firebaseUser) {
+      updateProfile(firebaseUser, {
+        displayName: newDisplayName,
+      })
+        .then(() => {
+          toastMessage("success", "Change name successfully");
+          dispatch(changeDisplayName(newDisplayName));
+        })
+        .catch((error: any) =>
+          toastMessage("error", convertErrorCodeToMessage(error.code))
+        )
+        .finally(() => {
+          setIsRetypedPassword(false);
+          setIsUpdatingName(false);
+        });
     }
   };
   const changePassword = () => {
@@ -154,15 +160,10 @@ const Profile = () => {
   const deleteAccount = () => {
     // @ts-ignore
     deleteUser(firebaseUser)
-      .then(async () => {
-        const res = await postUser("personal/deleteAccount", {
-          uid: currentUser?.uid,
-        });
-        if (res) {
-          toastMessage("success", "Delete successfully");
-          dispatch(logOut());
-          navigate("/");
-        }
+      .then(() => {
+        toastMessage("success", "Delete successfully");
+        dispatch(logOut());
+        navigate("/");
       })
       .catch((error: any) => {
         toastMessage("error", convertErrorCodeToMessage(error.code));

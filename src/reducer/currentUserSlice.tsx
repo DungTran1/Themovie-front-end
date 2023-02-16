@@ -25,12 +25,24 @@ const currentUserSlice = createSlice({
     logOut: (state) => {
       state.current = null;
     },
+    changeDisplayName: (state, action) => {
+      (state.current as User).displayName = action.payload;
+    },
+    changeEmailName: (state, action) => {
+      (state.current as User).email = action.payload;
+    },
     uploadProfile: (state, action) => {
       (state.current as User).photoURL = action.payload;
     },
   },
 });
 const { reducer, actions } = currentUserSlice;
-export const { getLoginUser, logOut, uploadProfile } = actions;
+export const {
+  getLoginUser,
+  logOut,
+  uploadProfile,
+  changeDisplayName,
+  changeEmailName,
+} = actions;
 
 export default reducer;

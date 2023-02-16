@@ -56,20 +56,20 @@ function SignUp({ setChangeTab }: any) {
           photoURL: getRandomAvatar(),
           displayName: `${data.firstname} ${data.lastname}`,
         })
-          .then(() => {})
-          .catch((error) => {
-            console.log(error);
-          });
-
-        signInWithEmailAndPassword(auth, data.email, data.password)
-          .then(async (userCredential) => {
-            postUser("auth/signup", {
-              uid: userCredential.user.uid,
-              photoURL: getRandomAvatar(),
-              displayName: `${data.firstname} ${data.lastname}`,
-            }).then((e) => dispatch(getLoginUser(userCredential.user)));
+          .then(() => {
+            dispatch(
+              getLoginUser({
+                ...user,
+                photoURL: getRandomAvatar(),
+                displayName: `${data.firstname} ${data.lastname}`,
+              })
+            );
+            signInWithEmailAndPassword(auth, data.email, data.password)
+              .then(() => navigate(-1))
+              .catch((error) => {
+                console.log(error);
+              });
           })
-          .then(() => navigate(-1))
           .catch((error) => {
             console.log(error);
           })
