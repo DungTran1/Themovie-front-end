@@ -14,6 +14,7 @@ import { HiOutlineUpload } from "react-icons/hi";
 import { uploadProfile } from "../../reducer/currentUserSlice";
 
 import Loading from "../Loading/Loading";
+import { postUser } from "../../service/axiosConfig";
 
 const ProfileImage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,8 +42,13 @@ const ProfileImage = () => {
             photoURL: photoUrl,
           })
             .then(() => {
-              dispatch(uploadProfile(photoUrl));
-              setIsLoading(false);
+              postUser("/comment/uploadImageComment", {
+                uid: currentUser.uid,
+                photoURL: photoUrl,
+              }).then(() => {
+                dispatch(uploadProfile(photoUrl));
+                setIsLoading(false);
+              });
             })
             .catch((error) => {
               console.log(error);

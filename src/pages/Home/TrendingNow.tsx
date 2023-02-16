@@ -14,7 +14,7 @@ const TrendingNow: FC = () => {
   // if (isLoading) return <div>Loading...</div>;
   return (
     <FilmSuggestion
-      className="mt-7"
+      className=""
       type="Trending"
       limitNumber={2}
       films={data}

@@ -22,7 +22,7 @@ const Comment: React.FC<CommentProp> = ({ movieId }) => {
   const user = useAppSelector((state) => state.auth.current);
   const inputRef: any = useRef([]);
   const [commentOption, setCommentOption] = useState("lastest");
-  const { data, refetch, isLoading } = useQuery<{ comment: UserComment[] }>(
+  const { data, refetch } = useQuery<{ comment: UserComment[] }>(
     ["comment", movieId],
     () => postUser("comment", { movieId: movieId }),
     {

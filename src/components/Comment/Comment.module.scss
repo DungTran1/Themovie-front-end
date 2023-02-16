@@ -8,13 +8,13 @@
   .parent {
     @include flex(unset, unset);
     margin: 20px 0;
-    animation: identifier 0.5s ease;
+    animation: identifier 0.2s ease;
   }
   .child {
     @include flex(unset, unset);
     margin-left: 70px;
     margin-top: 20px;
-    animation: identifier 0.5s ease;
+    animation: identifier 0.2s ease;
   }
 }
 @keyframes identifier {
