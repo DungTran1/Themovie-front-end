@@ -45,6 +45,11 @@ const Profile = () => {
     string | undefined
   >();
   const [isRetypedPassword, setIsRetypedPassword] = useState(false);
+  const dispatch = useAppDispatch();
+  const oldPasswordValueRef = useRef<HTMLInputElement>(null!);
+  const newPasswordValueRef = useRef<HTMLInputElement>(null!);
+  const emailValueRef = useRef<HTMLInputElement>(null!);
+  const displayNameValueRef = useRef<HTMLInputElement>(null!);
   useEffect(() => {
     const clickOutside = (e: any) => {
       setIsRetypedPassword(false);
@@ -53,11 +58,6 @@ const Profile = () => {
     return () => window.removeEventListener("click", clickOutside);
   }, []);
 
-  const dispatch = useAppDispatch();
-  const oldPasswordValueRef = useRef<HTMLInputElement>(null!);
-  const newPasswordValueRef = useRef<HTMLInputElement>(null!);
-  const emailValueRef = useRef<HTMLInputElement>(null!);
-  const displayNameValueRef = useRef<HTMLInputElement>(null!);
   const reAuthentication = async (type: string) => {
     const oldPassword = oldPasswordValueRef.current.value;
     if (!oldPassword.trim().length) {

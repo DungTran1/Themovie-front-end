@@ -11,20 +11,19 @@ import { useQuery } from "@tanstack/react-query";
 import { UserComment } from "../../shared/types";
 import { Link } from "react-router-dom";
 import { postUser } from "../../service/axiosConfig";
-import Loading from "../Loading/Loading";
 
 const cx = classnames.bind(styles);
 
 interface CommentProp {
-  id: number;
+  movieId: number;
 }
 
-const Comment: React.FC<CommentProp> = ({ id: movieId }) => {
+const Comment: React.FC<CommentProp> = ({ movieId }) => {
   const user = useAppSelector((state) => state.auth.current);
   const inputRef: any = useRef([]);
   const [commentOption, setCommentOption] = useState("lastest");
   const { data, refetch, isLoading } = useQuery<{ comment: UserComment[] }>(
-    ["comment"],
+    ["comment", movieId],
     () => postUser("comment", { movieId: movieId }),
     {
       refetchInterval: 1000 * 60,

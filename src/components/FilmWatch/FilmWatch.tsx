@@ -102,7 +102,7 @@ const FilmWatch: React.FC<FilmWatchProps & getWatchReturnedType> = ({
                   (detail as DetailMovie)?.overview}
               </p>
             </div>
-            <Comment id={id} />
+            <Comment movieId={id} />
           </div>
         </div>
         <div className={`${cx("rightbar__film")} l-3 md-12 sm-12`}>
