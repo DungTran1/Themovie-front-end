@@ -119,8 +119,7 @@ const Comment: React.FC<CommentProp> = ({ id: movieId }) => {
         )}
         <div className={cx("wrapper")}>
           <div className={cx("comment")}>
-            {isLoading && <Loading />}
-            {!isLoading && data && parentComment && (
+            {data && parentComment && (
               <CommentUser
                 commentOption={commentOption}
                 movieId={movieId}

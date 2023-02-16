@@ -26,7 +26,6 @@ import DefaultLayout from "./Layout/DefaultLayout";
 
 function App() {
   const dispatch = useAppDispatch();
-  console.log(process.env);
   useEffect(() => {
     const unregisterAuthObserver = onAuthStateChanged(auth, async (user) => {
       if (!user) {
