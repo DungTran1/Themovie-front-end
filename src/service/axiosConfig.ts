@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 //process.env.REACT_APP_API_URL
 const instance2 = axios.create({
-  baseURL: "https://themovie-api.onrender.com",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "content-type": "application/json",
   },

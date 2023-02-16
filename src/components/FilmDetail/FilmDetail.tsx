@@ -168,7 +168,8 @@ const FilmDetail: React.FC<FilmInfo> = ({
                     <div>RUNTIME</div>
                     <div>
                       {(detail as DetailMovie)?.runtime ||
-                        (detail as DetailTV)?.episode_run_time[0] ||
+                        ((detail as DetailTV)?.episode_run_time &&
+                          (detail as DetailTV)?.episode_run_time[0]) ||
                         ""}
                     </div>
                   </div>
