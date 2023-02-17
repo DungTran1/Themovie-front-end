@@ -1,16 +1,18 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+
+import { useQuery } from "@tanstack/react-query";
+
+import { UserComment } from "../../shared/types";
+import { postUser } from "../../service/axiosConfig";
+import { useAppSelector } from "../../store/hooks";
 
 import { IoSendSharp } from "react-icons/io5";
-import { useAppSelector } from "../../store/hooks";
 
 import CommentUser from "./CommentUser";
 
 import classnames from "classnames/bind";
 import styles from "./Comment.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { UserComment } from "../../shared/types";
-import { Link } from "react-router-dom";
-import { postUser } from "../../service/axiosConfig";
 
 const cx = classnames.bind(styles);
 

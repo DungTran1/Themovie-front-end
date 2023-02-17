@@ -21,10 +21,11 @@ const Home: React.FC = () => {
     const currentTab = localStorage.getItem("currentTab");
     return currentTab || "movie";
   });
-  const { data, isLoading, error } = useQuery<HomeFilms>(
+  const { data, isLoading, isError } = useQuery<HomeFilms>(
     ["movieDaily", media],
     () => getHomeFilms(media)
   );
+  if (isError) return <div>Error</div>;
   return (
     <>
       <div className={cx("home")}>
@@ -34,7 +35,7 @@ const Home: React.FC = () => {
               <MediaChange media={media} setMedia={setMedia} />
               <div className={cx("user")}>
                 <div>
-                  {isLoading && ((user && user?.displayName) || "Anonymous")}
+                  {!isLoading && ((user && user?.displayName) || "Anonymous")}
                 </div>
                 <div className={cx("logo__user")}>
                   <img

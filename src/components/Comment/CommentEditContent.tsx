@@ -1,19 +1,23 @@
 import { useRef, useState } from "react";
+import { useAppSelector } from "../../store/hooks";
+
 import Tippy from "@tippyjs/react/headless";
+
 import { IoSendSharp } from "react-icons/io5";
 import { FiMoreHorizontal } from "react-icons/fi";
+
 import { postUser } from "../../service/axiosConfig";
 import { UserComment } from "../../shared/types";
 
 import classnames from "classnames/bind";
 import styles from "./Comment.module.scss";
-import { useAppSelector } from "../../store/hooks";
-
 const cx = classnames.bind(styles);
+
 interface CommentEditContentProps {
   comment: UserComment;
   refetch: any;
 }
+
 const CommentEditContent: React.FC<CommentEditContentProps> = ({
   comment,
   refetch,
@@ -65,7 +69,7 @@ const CommentEditContent: React.FC<CommentEditContentProps> = ({
           </p>
         </div>
       )}
-      {isEditing && user?.uid === comment.uid && (
+      {!isEditing && user?.uid === comment.uid && (
         <div className={cx("hide")}>
           <Tippy
             offset={[0, 0]}

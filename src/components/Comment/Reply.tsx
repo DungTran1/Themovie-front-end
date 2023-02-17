@@ -1,10 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { UserComment } from "../../shared/types";
 import CommentUser from "./CommentUser";
 
 import classnames from "classnames/bind";
 import styles from "./Comment.module.scss";
-import React from "react";
 
 const cx = classnames.bind(styles);
 interface ReplyProps {

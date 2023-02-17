@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { User, UserComment } from "../../shared/types";
+import { postUser } from "../../service/axiosConfig";
 
 import { MdSend } from "react-icons/md";
-import classnames from "classnames/bind";
-import styles from "./Comment.module.scss";
+
 import CommentContent from "./CommentContent";
 import Reply from "./Reply";
-import { postUser } from "../../service/axiosConfig";
+
+import classnames from "classnames/bind";
+import styles from "./Comment.module.scss";
 
 const cx = classnames.bind(styles);
 
