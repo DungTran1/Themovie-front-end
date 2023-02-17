@@ -33,6 +33,7 @@
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
+    max-height: 50px;
     object-fit: cover;
   }
 }
@@ -174,7 +175,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 400px;
+  width: 400px;
+  max-width: 90%;
   border-radius: 15px;
   padding: 5px;
   z-index: 99;
@@ -213,6 +215,7 @@
         margin-left: 15px;
       }
       img {
+        object-fit: cover;
         width: 40px;
         height: 40px;
         border-radius: 50%;

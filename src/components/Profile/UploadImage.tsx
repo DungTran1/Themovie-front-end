@@ -42,7 +42,7 @@ const ProfileImage = () => {
             photoURL: photoUrl,
           })
             .then(() => {
-              postUser("/comment/uploadImageComment", {
+              postUser("/comment/uploadProfileComment", {
                 uid: currentUser.uid,
                 photoURL: photoUrl,
               }).then(() => {

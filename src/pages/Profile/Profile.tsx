@@ -27,6 +27,7 @@ import Password from "../../components/Profile/Password";
 import Delete from "../../components/Profile/Delete";
 import Email from "../../components/Profile/Email";
 import ConfirmPassword from "../../components/Profile/ConfirmPassword";
+import { postUser } from "../../service/axiosConfig";
 
 import classnames from "classnames/bind";
 import styles from "./Profile.module.scss";
@@ -125,8 +126,13 @@ const Profile = () => {
         displayName: newDisplayName,
       })
         .then(() => {
-          toastMessage("success", "Change name successfully");
-          dispatch(changeDisplayName(newDisplayName));
+          postUser("/comment/uploadProfileComment", {
+            uid: currentUser?.uid,
+            displayName: newDisplayName,
+          }).then(() => {
+            toastMessage("success", "Change name successfully");
+            dispatch(changeDisplayName(newDisplayName));
+          });
         })
         .catch((error: any) =>
           toastMessage("error", convertErrorCodeToMessage(error.code))
