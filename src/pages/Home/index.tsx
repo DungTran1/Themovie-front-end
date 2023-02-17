@@ -34,9 +34,7 @@ const Home: React.FC = () => {
             <div className={cx("media__change")}>
               <MediaChange media={media} setMedia={setMedia} />
               <div className={cx("user")}>
-                <div>
-                  {!isLoading && ((user && user?.displayName) || "Anonymous")}
-                </div>
+                <div>{(data && (user?.displayName || "Anonymous")) || ""}</div>
                 <div className={cx("logo__user")}>
                   <img
                     src={
