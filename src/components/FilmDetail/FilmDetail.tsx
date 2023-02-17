@@ -87,7 +87,9 @@ const FilmDetail: React.FC<FilmInfo> = ({
         <div className={`${cx("film")} l-9 md-12 sm-12`}>
           <div className={cx("backdrop__image")}>
             <img src={backdrop} alt="" />
-            {!backdrop && <div style={{ minHeight: "400px" }}></div>}
+            {!detail?.backdrop_path && (
+              <div style={{ minHeight: "400px" }}></div>
+            )}
             <div className={cx("overlay")}></div>
             <div className={cx("function__btn")}>
               <button
