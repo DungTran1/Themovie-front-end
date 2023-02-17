@@ -41,9 +41,6 @@ const Email: React.FC<EmailProps> = ({
               ref={emailValueRef}
               defaultValue={currentUser?.email || ""}
               autoFocus
-              onKeyDown={(e) => {
-                if (e.key === "Escape") setIsUpdatingEmail(false);
-              }}
               className=""
             />
             <button
@@ -71,7 +68,7 @@ const Email: React.FC<EmailProps> = ({
               <BiSend size={25} />
             </button>
           </form>
-          <p className="">Press Esc to cancel</p>
+          <p onClick={() => setIsUpdatingEmail(false)}>Press Esc to cancel</p>
         </>
       )}
       {}

@@ -12,7 +12,7 @@
   }
   .child {
     @include flex(unset, unset);
-    margin-left: 70px;
+    margin-left: 50px;
     margin-top: 20px;
     animation: identifier 0.2s ease;
   }
@@ -28,11 +28,10 @@
   }
 }
 .avatar {
-  width: 50px;
   img {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     object-fit: cover;
   }
 }
@@ -74,9 +73,8 @@
   .info {
     position: relative;
     background-color: rgba($color: #fff, $alpha: 0.1);
-    padding: 10px;
+    padding: 10px 50px 10px 10px;
     border-radius: 10px;
-    max-width: 70rem;
     h5 {
       color: #fff;
       margin-bottom: 10px;
@@ -93,6 +91,9 @@
       padding: 1px;
       border-radius: 20px;
       @include flex(center, unset);
+      & > :first-child {
+        height: 23px;
+      }
       .all__icon {
         display: none;
       }
@@ -121,12 +122,15 @@
         border: transparent;
         outline: none;
       }
+      p {
+        color: #4885f3;
+      }
     }
   }
   .hide {
     position: absolute;
-    top: 20%;
-    right: -35px;
+    top: 0;
+    right: 0;
 
     ul {
       background-color: #0c0b0b;
@@ -230,8 +234,8 @@
   margin-left: 0;
 }
 .comment__user__part {
-  margin: 20px 0 10px 70px;
-  animation: showReply 0.3s ease;
+  margin: 20px 0 10px 50px;
+  animation: showReply 0.2s ease;
   .user__comments {
     form {
       @include flex(center, unset);
@@ -242,7 +246,7 @@
         object-fit: cover;
       }
       input {
-        width: 700px;
+        width: 70%;
         border-radius: 30px;
         background-color: rgba($color: #fff, $alpha: 0.1);
         padding: 14px;

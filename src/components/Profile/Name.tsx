@@ -70,7 +70,7 @@ const Name: React.FC<NameProps> = ({
               <BiSend size={25} />
             </button>
           </form>
-          <p className="text-sm mt-1">Press Esc to cancel</p>
+          <p onClick={() => setIsUpdatingName(false)}>Press Esc to cancel</p>
         </>
       )}
     </div>

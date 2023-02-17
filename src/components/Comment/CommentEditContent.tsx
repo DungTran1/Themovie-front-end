@@ -50,21 +50,22 @@ const CommentEditContent: React.FC<CommentEditContentProps> = ({
             <div
               suppressContentEditableWarning={true}
               contentEditable
-              onKeyDown={(e) => {
-                if (e.key === "Escape") {
-                  setIsEditing(false);
-                }
-              }}
               ref={ref}
             ></div>
             <span onClick={handleEditComment}>
               <IoSendSharp color="#4fa1ff" size={25} />
             </span>
           </div>
-          <p>Esc to remove</p>
+          <p
+            onClick={() => {
+              setIsEditing(false);
+            }}
+          >
+            Click to remove
+          </p>
         </div>
       )}
-      {user?.uid === comment.uid && (
+      {isEditing && user?.uid === comment.uid && (
         <div className={cx("hide")}>
           <Tippy
             offset={[0, 0]}
