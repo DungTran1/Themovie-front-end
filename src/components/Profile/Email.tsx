@@ -68,7 +68,7 @@ const Email: React.FC<EmailProps> = ({
               <BiSend size={25} />
             </button>
           </form>
-          <p onClick={() => setIsUpdatingEmail(false)}>Press Esc to cancel</p>
+          <p onClick={() => setIsUpdatingEmail(false)}>Click to cancel</p>
         </>
       )}
       {}

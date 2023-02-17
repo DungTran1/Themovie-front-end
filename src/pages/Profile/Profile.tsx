@@ -179,7 +179,7 @@ const Profile = () => {
           <p>Here you can edit public information about yourself.</p>
           <p>
             If you signed in with Google or Facebook, you can't change your
-            email and password.
+            email,name and password.
           </p>
           {isTabletMobile && (
             <div className={cx("profile__photo")}>

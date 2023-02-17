@@ -1,11 +1,7 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { CgProfile } from "react-icons/cg";
-import { AiOutlineMail } from "react-icons/ai";
-import { RiLockPasswordLine } from "react-icons/ri";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-
-import classnames from "classnames/bind";
-import styles from "./Login.module.scss";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -13,13 +9,20 @@ import {
 } from "firebase/auth";
 import { auth } from "../../shared/firebase";
 import { getRandomAvatar, toastMessage } from "../../shared/utils";
-import { useNavigate } from "react-router-dom";
-import { postUser } from "../../service/axiosConfig";
+import { useAppSelector } from "../../store/hooks";
 import { getLoginUser } from "../../reducer/currentUserSlice";
-import Loading from "../../components/Loading/Loading";
-import { useState } from "react";
 
+import { CgProfile } from "react-icons/cg";
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
+
+import Loading from "../../components/Loading/Loading";
+import ModalNotification from "./ModalNotification";
+
+import classnames from "classnames/bind";
+import styles from "./Login.module.scss";
 const cx = classnames.bind(styles);
+
 interface IFormInput {
   firstname: string;
   lastname: string;
@@ -31,6 +34,7 @@ function SignUp({ setChangeTab }: any) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const currentUser = useAppSelector((state) => state.auth.current);
   const {
     register,
     handleSubmit,
@@ -80,6 +84,9 @@ function SignUp({ setChangeTab }: any) {
   return (
     <>
       {isLoading && <Loading />}
+      {currentUser && (
+        <ModalNotification type="success" message={"Sign in successfully"} />
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={cx("fullname")}>
           <div className={cx("firstname")}>

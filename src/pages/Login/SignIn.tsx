@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { signInWithProvider } from "../../components/Auth/SignInWithProvider";
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
@@ -15,6 +15,7 @@ import { useAppSelector } from "../../store/hooks";
 import { convertErrorCodeToMessage, toastMessage } from "../../shared/utils";
 import { auth } from "../../shared/firebase";
 
+import { signInWithProvider } from "../../components/Auth/SignInWithProvider";
 import ModalNotification from "./ModalNotification";
 import Loading from "../../components/Loading/Loading";
 

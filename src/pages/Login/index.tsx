@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
 import classnames from "classnames/bind";
 import styles from "./Login.module.scss";
-import { ToastContainer } from "react-toastify";
 
 const cx = classnames.bind(styles);
 
