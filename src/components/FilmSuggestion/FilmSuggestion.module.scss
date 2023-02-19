@@ -21,6 +21,14 @@
     }
     .info {
       margin: 10px 5px 0 10px;
+      h3 {
+        word-break: break-all;
+        max-height: 80px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        display: -webkit-box;
+      }
       h4 {
         margin-top: 20px;
       }
