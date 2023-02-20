@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import "firebase/compat/auth";
 
 import { getLoginUser } from "./reducer/currentUserSlice";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 import { auth } from "./shared/firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -32,9 +31,7 @@ function App() {
         console.log("not logged");
         return;
       } else {
-        const result = dispatch(getLoginUser(user));
-        const unwrap = unwrapResult(result);
-        console.log("unwrap", unwrap);
+        dispatch(getLoginUser(user));
       }
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.

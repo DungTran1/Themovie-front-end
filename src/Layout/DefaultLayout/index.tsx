@@ -82,13 +82,13 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
                 <h2>GET SOCIAL</h2>
                 <p>
                   Follow me on
-                  <a href="#">
+                  <a href="https://www.facebook.com/profile.php?id=100018900668599">
                     <strong>FACEBOOK</strong>
                   </a>
                 </p>
               </div>
               <div className="col l-3 sm-6">
-                <h2>GET IN TOUCH</h2>
+                <h2>ADRESS</h2>
                 <p>Mai Dich, Ha Noi</p>
               </div>
               <div className="col l-3 sm-6">
