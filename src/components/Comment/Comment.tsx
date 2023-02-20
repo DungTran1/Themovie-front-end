@@ -26,11 +26,7 @@ const Comment: React.FC<CommentProp> = ({ movieId }) => {
   const [commentOption, setCommentOption] = useState("lastest");
   const { data, refetch } = useQuery<{ comment: UserComment[] }>(
     ["comment", movieId, user],
-    () => postUser("comment", { movieId: movieId }),
-    {
-      refetchInterval: 1000 * 60,
-      staleTime: 1000 * 60,
-    }
+    () => postUser("comment", { movieId: movieId })
   );
   const [numberOfComments, setNumberOfComments] = useState<number>(5);
 

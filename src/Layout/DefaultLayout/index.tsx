@@ -75,25 +75,25 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
           <div>
             <div className="row">
               <div className="col l-3 sm-6">
-                <h2>Email</h2>
+                <h2>EMAIL</h2>
                 <p>trantuandungzzz@gmail.com</p>
               </div>
               <div className="col l-3 sm-6">
                 <h2>GET SOCIAL</h2>
                 <p>
                   Follow me on
-                  <a href="https://www.facebook.com/dung.trantuan.7771">
+                  <a href="#">
                     <strong>FACEBOOK</strong>
                   </a>
                 </p>
               </div>
               <div className="col l-3 sm-6">
                 <h2>GET IN TOUCH</h2>
-                <p>My Duc, Ha Noi</p>
+                <p>Mai Dich, Ha Noi</p>
               </div>
               <div className="col l-3 sm-6">
-                <h2>PROJECT INQUIRIES</h2>
-                <p>We loves you</p>
+                <h2>Help</h2>
+                <p>Contact Me</p>
               </div>
             </div>
           </div>

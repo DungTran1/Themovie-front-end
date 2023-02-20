@@ -27,7 +27,7 @@ const MenuItem: React.FC<RecommendGenresProps> = ({ media }) => {
   >(["genres"], getRecommendGenres2);
 
   if (isError) return <div>ERROR: {error.message}</div>;
-  if (isLoading) return <div>is loading...</div>;
+  if (isLoading) return <div></div>;
   const randomGenres = getRandomGenres(
     media === "movie" ? data.movieGenres : data.tvGenres
   );
