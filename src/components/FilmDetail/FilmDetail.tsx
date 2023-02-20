@@ -37,7 +37,7 @@ const FilmDetail: React.FC<FilmInfo> = ({
   const { data, refetch } = useQuery(["checkbookmark", detail?.id], () =>
     postUser("bookmark/check/" + detail?.id, { uid: user?.uid })
   );
-  const backdrop: any = apiConfig.originalImage(detail?.backdrop_path);
+  const backdrop = apiConfig.originalImage(detail?.backdrop_path);
   const notify = (e: React.MouseEvent) => {
     if (!user) {
       e.preventDefault();
@@ -119,8 +119,10 @@ const FilmDetail: React.FC<FilmInfo> = ({
                   </h3>
                   <div className={cx("genres")}>
                     {JSON.stringify(detail) !== "{}" &&
-                      detail?.genres.map((item: any, index: any) => (
-                        <button key={item.id || index}>{item.name}</button>
+                      detail?.genres.map((item, index) => (
+                        <Link to={`/discover?genres=${item.id}`}>
+                          <button key={item.id || index}>{item.name}</button>
+                        </Link>
                       ))}
                   </div>
                 </div>
@@ -141,8 +143,10 @@ const FilmDetail: React.FC<FilmInfo> = ({
               </h3>
               <div className={cx("genres")}>
                 {JSON.stringify(detail) !== "{}" &&
-                  detail?.genres.map((item: any, index: any) => (
-                    <button key={item.id || index}>{item.name}</button>
+                  detail?.genres.map((item, index) => (
+                    <Link to={`/discover?genres=${item.id}`}>
+                      <button key={item.id || index}>{item.name}</button>
+                    </Link>
                   ))}
               </div>
             </div>
