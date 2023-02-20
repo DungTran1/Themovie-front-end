@@ -93,6 +93,9 @@
       padding: 1px;
       border-radius: 20px;
       @include flex(center, unset);
+      & > div {
+        height: 25px;
+      }
       .all__icon {
         display: none;
         & > div {
