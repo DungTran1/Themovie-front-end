@@ -93,11 +93,11 @@
       padding: 1px;
       border-radius: 20px;
       @include flex(center, unset);
-      & > :first-child {
-        height: 23px;
-      }
       .all__icon {
         display: none;
+        & > div {
+          height: 25px;
+        }
       }
       &:hover .all__icon {
         display: block;

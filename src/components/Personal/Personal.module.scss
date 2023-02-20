@@ -2,6 +2,7 @@
 .film__list {
   flex: 1;
   color: #fff;
+  padding: 5px;
 }
 .list {
   input {
@@ -32,11 +33,10 @@
   }
 }
 .header {
-  padding-right: 3rem;
-  margin-bottom: 3rem;
+  margin: 20px 0;
   @include flex(unset, space-between);
   .title {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
   }
   & + div {

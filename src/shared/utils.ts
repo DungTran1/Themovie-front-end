@@ -1,9 +1,5 @@
-import { EMBED_TO, IMAGE_URL } from "./constants";
+import { EMBED_TO } from "./constants";
 import { toast, ToastOptions } from "react-toastify";
-// export const resizeImage = (
-//   imageUrl: string,
-//   width: string = "original"
-// ): string => `${IMAGE_URL}/${width}${imageUrl}`;
 
 export const embedMovie = (id: number): string => `${EMBED_TO}/movie?id=${id}`;
 export const embedTV = (id: number, season: number, episode: number): string =>

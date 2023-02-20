@@ -15,9 +15,8 @@ const cx = classnames.bind(styles);
 
 interface FilmListProps {
   media: string;
-  setMedia: React.Dispatch<React.SetStateAction<string>>;
 }
-const FilmList: React.FC<FilmListProps> = ({ media, setMedia }) => {
+const FilmList: React.FC<FilmListProps> = ({ media }) => {
   const [param] = useSearchParams();
   const config = {
     sort_by: param.get("sort_by"),
@@ -32,7 +31,6 @@ const FilmList: React.FC<FilmListProps> = ({ media, setMedia }) => {
   const {
     data: films,
     error: errorMovies,
-    isLoading,
     fetchNextPage: fetchNextPageMovie,
     hasNextPage: hasNextPageMovie,
   } = useInfiniteQuery<ItemsPage, Error>(

@@ -2,13 +2,17 @@
 .discover {
   flex: 1;
   color: #fff;
+  padding: 5px;
 }
 .header {
-  padding-right: 3rem;
-  margin-bottom: 3rem;
+  padding-right: 30px;
+  margin-bottom: 30px;
   @include flex(unset, space-between);
   .title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
+  }
+  .searchBox {
+    width: 250px;
   }
 }

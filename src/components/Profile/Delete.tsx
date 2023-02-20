@@ -21,7 +21,7 @@ const Delete: React.FC<DeletedProps> = ({
       {isDeleted && (
         <>
           <div className={cx("confirm_delete")}>
-            <p> Are you sure you want to delete this account?</p>
+            <h5> Are you sure you want to delete this account?</h5>
             <div>
               <button
                 onClick={(e) => {

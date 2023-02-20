@@ -18,7 +18,7 @@ const Discover = () => {
       <div className={cx("header")}>
         <div className={cx("title")}>FIND FILMS THAT BEST FIT YOU</div>
         {!isMobile && (
-          <div style={{ width: "25rem" }}>
+          <div className={cx("searchBox")}>
             <SearchBox />
           </div>
         )}
@@ -26,7 +26,7 @@ const Discover = () => {
       {!isMobile && (
         <div className="row">
           <div className="l-9">
-            <FilmList media={media} setMedia={setMedia} />
+            <FilmList media={media} />
           </div>
           <div className="l-3 pos-rel">
             <MenuFilter media={media} />
@@ -35,10 +35,9 @@ const Discover = () => {
       )}
       {isMobile && (
         <>
-          <SearchBox />
           <MenuFilter media={media} />
           <MediaChange media={media} setMedia={setMedia} />
-          <FilmList media={media} setMedia={setMedia} />
+          <FilmList media={media} />
         </>
       )}
     </div>
