@@ -14,7 +14,7 @@ const Bookmark = () => {
   const { data, isLoading, isError, refetch } = useQuery<Item[]>(
     ["bookmark", media],
     () => getPersonal("bookmark", user, media),
-    { initialData: [], refetchInterval: 1000, staleTime: 1000 }
+    { refetchInterval: 1000, staleTime: 1000 }
   );
   if (isError) return <div>FILMS I WATCHED</div>;
 

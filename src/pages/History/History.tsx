@@ -15,7 +15,7 @@ const History = () => {
   const { data, isLoading, isError, refetch } = useQuery<Item[]>(
     ["history", media],
     () => getPersonal("history", user, media),
-    { initialData: [], refetchInterval: 1000, staleTime: 1000 }
+    { refetchInterval: 1000, staleTime: 1000 }
   );
   if (isError) return <div>error</div>;
   return (
